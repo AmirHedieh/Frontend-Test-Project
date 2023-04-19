@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { createContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App'
+import { App } from './App'
 import reportWebVitals from './reportWebVitals'
+import { RootStore, rootStore } from './mobx/RootStore'
+
+if (
+  !new (class {
+    x
+  })().hasOwnProperty('x')
+)
+  throw new Error('Transpiler is not configured correctly')
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
+export const Stores = createContext<RootStore>(rootStore)
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Stores.Provider value={rootStore}>
+      <App />
+    </Stores.Provider>
   </React.StrictMode>
 )
 
