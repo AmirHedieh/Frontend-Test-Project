@@ -6,16 +6,19 @@ import { Colors } from '../../utils/Constants'
 interface IBaseTextProps {
   text: string
   style?: React.CSSProperties
+  className?: string
 }
 
-export const BaseText: React.FC<IBaseTextProps> = ({ text = '', style = {} }: IBaseTextProps) => {
+export const BaseText: React.FC<IBaseTextProps> = ({ text = '', style = {}, className = '' }: IBaseTextProps) => {
   const firstChar = text !== '' && text != null ? text[0] : 'ا'
   const fontFamily = CommonValidator.isPersian(firstChar) ? Fonts.persian.vazir : Fonts.english.openSansRegular
   const fontSize = FontSizes.h3
   const color = Colors.primaryMedium
   const mergedStyles = { fontFamily, fontSize, color, ...style }
+  const mergedClassNames = `BaseText ${className}`
   return (
     <span
+      className={mergedClassNames}
       style={mergedStyles}
       title={text}
       role="text"

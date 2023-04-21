@@ -41,7 +41,7 @@ export const ToggleSwitch: React.FC<IToggleSwitchProps> = ({
         <span className={`react-switch-button`} />
         {!isOn && <div style={{ flex: 1 }} />}
         <BaseText
-          style={{ paddingLeft: 12, paddingRight: 12, color: textColor, fontSize: 12 }}
+          style={{ paddingLeft: 12, paddingRight: 12, color: textColor, fontSize: 12, userSelect: 'none' }}
           text={isOn ? onText : offText}
         />
         {isOn && <div style={{ flex: 1 }} />}

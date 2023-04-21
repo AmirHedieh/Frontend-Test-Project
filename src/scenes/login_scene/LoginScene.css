@@ -19,33 +19,37 @@
   right: 20px;
 }
 
-.box {
+.edittext {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   width: 300px;
-  height: 80px;
-  margin-top: 20px;
-  padding: 10px;
+  height: 50px;
+  /* margin-top: 10px; */
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
 }
 
-.box h2.title {
-  font-size: 16px;
-  margin: 0;
+.title {
+  font-size: 32px;
+  /* margin: 0;
   padding: 0;
   margin-bottom: 10px;
-  margin-top: -20px;
+  margin-top: -20px; */
 }
 
-.box input {
+.edittext input {
+  display: flex;
+  flex: 1;
+  width: 90%;
   border: none;
   outline: none;
-  padding: 10px;
-  width: 100%;
+  padding: 16px;
+  text-align: center;
   font-size: 16px;
   border-radius: 8px;
 }

@@ -6,6 +6,8 @@ import { Localization } from '../../text_process/Localization'
 import { BaseText } from '../../components/base_text/BaseText'
 import { EditText } from '../../components/edit_text/EditText'
 import { ToggleSwitch } from '../../components/toggle_switch/ToggleSwitch'
+import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
+import { FontSizes, GlobalStyles } from '../../GlobalStyles'
 
 function LoginScene() {
   const uiStore = useContext(Stores).getUIStore()
@@ -33,6 +35,8 @@ function LoginScene() {
 
   return (
     <div className="container">
+      {/* UI control elements like language and theme */}
+
       <ToggleSwitch
         className="theme-switch"
         isOn={uiStore.getTheme() === 'light' ? true : false}
@@ -43,7 +47,6 @@ function LoginScene() {
         offText={Localization.translate('dark')}
       />
 
-      <BaseText text={emailEditTextRef?.getStandardText()} />
       <div className="language-dropdown">
         <label htmlFor="language-select">
           <BaseText text={Localization.translate('selectLanguage')} />
@@ -56,24 +59,46 @@ function LoginScene() {
           <option value="fa">{Localization.translate('fa')}</option>
         </select>
       </div>
-      <div className="box">
-        <h2 className="title">{Localization.translate('email')}</h2>
-        <EditText
-          ref={(ref) => (emailEditTextRef = ref)}
-          className="input"
-          type="email"
-          required={true}
-          placeholder="example@mail.com"
-        />
+
+      {/* User input boxes */}
+      <div>
+        <RTLAwareView style={styles.editTextTitleContainer}>
+          <BaseText
+            style={styles.editTextTitle}
+            text={Localization.translate('email')}
+          />
+          <div style={GlobalStyles.spacer} />
+        </RTLAwareView>
+        <div style={GlobalStyles.verticalSpacerSmall} />
+        <div className="edittext">
+          <EditText
+            ref={(ref) => (emailEditTextRef = ref)}
+            className="input"
+            type="email"
+            maxLength={72}
+            required={true}
+            placeholder="example@mail.com"
+          />
+        </div>
       </div>
-      <div className="box">
-        <h2 className="title">{Localization.translate('password')}</h2>
-        <EditText
-          ref={(ref) => (passwordEditTextRef = ref)}
-          className="input"
-          type="password"
-          placeholder="**********"
-        />
+      <div style={GlobalStyles.verticalSpacerLarge} />
+      <div>
+        <RTLAwareView style={styles.editTextTitleContainer}>
+          <BaseText
+            style={styles.editTextTitle}
+            text={Localization.translate('password')}
+          />
+          <div style={GlobalStyles.spacer} />
+        </RTLAwareView>
+        <div style={GlobalStyles.verticalSpacerSmall} />
+        <div className="edittext">
+          <EditText
+            ref={(ref) => (passwordEditTextRef = ref)}
+            className="input"
+            type="password"
+            placeholder="**********"
+          />
+        </div>
       </div>
       <button
         className="button"
@@ -87,4 +112,16 @@ function LoginScene() {
     </div>
   )
 }
+
+const styles = {
+  editTextTitle: {
+    fontSize: FontSizes.p,
+    fontWeight: 'bold',
+  },
+  editTextTitleContainer: {
+    paddingLeft: '12px',
+    paddingRight: '12px',
+  },
+}
+
 export default observer(LoginScene)

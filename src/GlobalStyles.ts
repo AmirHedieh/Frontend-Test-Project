@@ -23,3 +23,19 @@ export const Fonts = {
     openSansRegular: 'OpenSans-Regular',
   },
 }
+
+export const GlobalStyles = {
+  spacer: {
+    display: 'flex',
+    flex: 1,
+  },
+  verticalSpacerLarge: {
+    height: '32px',
+  },
+  verticalSpacerMedium: {
+    height: '16px',
+  },
+  verticalSpacerSmall: {
+    height: '8px',
+  },
+}
