@@ -1,7 +1,7 @@
 import React from 'react'
 import { BaseText } from '../base_text/BaseText'
 import { RTLAwareView } from '../rtl_aware/RTLAwareView'
-import { Fonts, FontSizes, GlobalStyles } from '../../GlobalStyles'
+import { FontSizes } from '../../GlobalStyles'
 import { Colors } from '../../utils/Constants'
 
 interface INormalButtonProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,41 +15,48 @@ interface INormalButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   textStyle?: React.CSSProperties
 }
 
-export class NormalButton extends React.Component<INormalButtonProps> {
-  public static defaultProps: INormalButtonProps = {
-    onClick: () => {},
-    text: '',
-    disabled: false,
-    containerStyle: null,
-    fontSize: FontSizes.h3,
-    width: null,
-    height: null,
-    textStyle: null,
+export const NormalButton: React.FC<INormalButtonProps> = ({
+  onClick,
+  text,
+  disabled,
+  containerStyle,
+  fontSize,
+  width,
+  height,
+  textStyle,
+}) => {
+  const extraStyle: React.CSSProperties = {}
+  if (width != null) {
+    extraStyle.width = width
   }
+  if (height != null) {
+    extraStyle.height = height
+  }
+  return (
+    <button
+      style={Object.assign({}, Styles.container, containerStyle, extraStyle)}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <RTLAwareView style={Styles.rtlAwareview}>
+        <BaseText
+          text={text}
+          style={Object.assign({}, Styles.textStyle, textStyle)}
+        />
+      </RTLAwareView>
+    </button>
+  )
+}
 
-  public render(): JSX.Element {
-    const extraStyle: React.CSSProperties = {}
-    if (this.props.width != null) {
-      extraStyle.width = this.props.width
-    }
-    if (this.props.height != null) {
-      extraStyle.height = this.props.height
-    }
-    return (
-      <button
-        style={Object.assign({}, Styles.container, this.props.containerStyle, extraStyle)}
-        onClick={this.props.onClick}
-        disabled={this.props.disabled}
-      >
-        <RTLAwareView style={Styles.rtlAwareview}>
-          <BaseText
-            text={this.props.text}
-            style={Object.assign({}, Styles.textStyle, this.props.textStyle)}
-          />
-        </RTLAwareView>
-      </button>
-    )
-  }
+NormalButton.defaultProps = {
+  onClick: () => {},
+  text: '',
+  disabled: false,
+  containerStyle: null,
+  fontSize: FontSizes.h3,
+  width: null,
+  height: null,
+  textStyle: null,
 }
 
 export const Styles = {
