@@ -151,6 +151,7 @@ const styles = {
   },
   inputError: {
     color: 'red',
+    fontSize: FontSizes.p,
   },
 }
 
