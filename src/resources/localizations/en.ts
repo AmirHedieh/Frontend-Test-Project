@@ -11,4 +11,11 @@ export const En = {
   LoginSceneInputEmptyError: 'Please Enter Email & Password Correctly',
   LoginSceneWrongEmailFormat: 'Invalid Email',
   LoginSceneWrongPasswordFormat: 'Your Password must at least contain 8 characters',
+  /** Register Scene */
+  RegisterSceneRegister: 'Register',
+  RegisterSceneEmail: 'Email',
+  RegisterScenePassword: 'Password',
+  RegisterSceneInputEmptyError: 'Please Enter Email & Password Correctly',
+  RegisterSceneWrongEmailFormat: 'Invalid Email',
+  RegisterSceneWrongPasswordFormat: 'Your Password must at least contain 8 characters',
 }

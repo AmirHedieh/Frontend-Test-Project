@@ -11,4 +11,11 @@ export const Fa = {
   loginsceneInputEmptyError: 'لطفا ایمیل و رمز عبور خود را وارد کنید',
   LoginSceneWrongEmailFormat: 'ایمیل نامعتبر میباشد',
   LoginSceneWrongPasswordFormat: 'رمز عبور شما باید حداقل شامل 8 حرف باشد',
+  /** Register Scene */
+  RegisterSceneRegister: 'ثبت نام',
+  RegisterSceneEmail: 'ایمیل',
+  RegisterScenePassword: 'رمز عبور',
+  RegisterSceneInputEmptyError: 'لطفا ایمیل و رمز عبور خود را وارد کنید',
+  RegisterSceneWrongEmailFormat: 'ایمیل نامعتبر میباشد',
+  RegisterSceneWrongPasswordFormat: 'رمز عبور شما باید حداقل شامل 8 حرف باشد',
 }
