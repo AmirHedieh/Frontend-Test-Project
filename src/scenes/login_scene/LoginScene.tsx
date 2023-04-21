@@ -8,29 +8,49 @@ import { EditText } from '../../components/edit_text/EditText'
 import { ToggleSwitch } from '../../components/toggle_switch/ToggleSwitch'
 import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { FontSizes, GlobalStyles } from '../../GlobalStyles'
+import { CommonValidator } from '../../utils/Validator'
 
 function LoginScene() {
   const uiStore = useContext(Stores).getUIStore()
+  const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    if (
+      CommonValidator.isNullOrEmpty(emailEditTextRef.getStandardText()) ||
+      CommonValidator.isNullOrEmpty(passwordEditTextRef.getStandardText())
+    ) {
+      setErrorMessage(Localization.translate('LoginSceneInputEmptyError'))
+      return
+    }
+
+    if (!CommonValidator.isEmail(emailEditTextRef.getStandardText())) {
+      setErrorMessage(Localization.translate('LoginSceneWrongEmailFormat'))
+      return
+    }
+
+    if (!CommonValidator.isPassword(passwordEditTextRef.getStandardText())) {
+      setErrorMessage(Localization.translate('LoginSceneWrongPasswordFormat'))
+      return
+    }
+
+    setErrorMessage(null)
+
     console.log('Email:', emailEditTextRef.getStandardText())
     console.log('Password:', passwordEditTextRef.getStandardText())
   }
 
   const handleLanguageChange = (e) => {
-    console.log(e.target.value)
     uiStore.setLanguage(e.target.value)
-    // Add your selection handler here
   }
 
   const handleThemeChange = () => {
     uiStore.toggleTheme()
-    console.log(uiStore.getTheme())
-    // Add your selection handler here
   }
 
   return (
@@ -65,7 +85,7 @@ function LoginScene() {
         <RTLAwareView style={styles.editTextTitleContainer}>
           <BaseText
             style={styles.editTextTitle}
-            text={Localization.translate('email')}
+            text={Localization.translate('LoginSceneEmail')}
           />
           <div style={GlobalStyles.spacer} />
         </RTLAwareView>
@@ -86,7 +106,7 @@ function LoginScene() {
         <RTLAwareView style={styles.editTextTitleContainer}>
           <BaseText
             style={styles.editTextTitle}
-            text={Localization.translate('password')}
+            text={Localization.translate('LoginScenePassword')}
           />
           <div style={GlobalStyles.spacer} />
         </RTLAwareView>
@@ -100,12 +120,19 @@ function LoginScene() {
           />
         </div>
       </div>
+      <div style={GlobalStyles.verticalSpacerMedium} />
+      {errorMessage && (
+        <BaseText
+          style={styles.inputError}
+          text={errorMessage}
+        />
+      )}
       <button
         className="button"
         onClick={handleSubmit}
       >
         <BaseText
-          text={Localization.translate('login')}
+          text={Localization.translate('LoginSceneLogin')}
           style={{ color: 'white' }}
         />
       </button>
@@ -121,6 +148,9 @@ const styles = {
   editTextTitleContainer: {
     paddingLeft: '12px',
     paddingRight: '12px',
+  },
+  inputError: {
+    color: 'red',
   },
 }
 
