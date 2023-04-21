@@ -9,7 +9,7 @@ interface IBaseTextProps {
 }
 
 export const BaseText: React.FC<IBaseTextProps> = ({ text = '', style = {} }: IBaseTextProps) => {
-  const firstChar = text !== '' && text != null ? text[0] : 'a'
+  const firstChar = text !== '' && text != null ? text[0] : 'ا'
   const fontFamily = CommonValidator.isPersian(firstChar) ? Fonts.persian.vazir : Fonts.english.openSansRegular
   const fontSize = FontSizes.h3
   const color = Colors.primaryMedium

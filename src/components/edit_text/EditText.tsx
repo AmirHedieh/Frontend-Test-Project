@@ -10,6 +10,7 @@ interface IEditTextProps {
   type: string
   placeholder?: string
   onChangeText?: (text: string) => void
+  required?: boolean
   maxLength?: number
   onFocus?: () => void
   onBlur?: () => void
@@ -23,6 +24,7 @@ export class EditText extends React.PureComponent<IEditTextProps> {
     type: null,
     placeholder: null,
     onChangeText: () => {},
+    required: false,
     maxLength: 20,
     onFocus: () => {},
     onBlur: () => {},
@@ -86,6 +88,7 @@ export class EditText extends React.PureComponent<IEditTextProps> {
         value={this.state.text}
         placeholder={placeholderText}
         onChange={(e) => this.setStateText(e.target.value)}
+        required={this.props.required}
         maxLength={this.props.maxLength}
         onFocus={this.props.onFocus}
         onBlur={this.props.onBlur}

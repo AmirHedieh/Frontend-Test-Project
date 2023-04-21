@@ -1,27 +1,22 @@
 import './LoginScene.css'
 import { observer } from 'mobx-react'
-import { useState, createContext, useContext } from 'react'
+import { useState, useContext, createRef } from 'react'
 import { Stores } from '../..'
 import { Localization } from '../../text_process/Localization'
+import { BaseText } from '../../components/base_text/BaseText'
+import { EditText } from '../../components/edit_text/EditText'
+import { ToggleSwitch } from '../../components/toggle_switch/ToggleSwitch'
 
 function LoginScene() {
   const uiStore = useContext(Stores).getUIStore()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
+  let emailEditTextRef: EditText = null
+  let passwordEditTextRef: EditText = null
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('Email:', email)
-    console.log('Password:', password)
+    console.log('Email:', emailEditTextRef.getStandardText())
+    console.log('Password:', passwordEditTextRef.getStandardText())
   }
 
   const handleLanguageChange = (e) => {
@@ -30,45 +25,64 @@ function LoginScene() {
     // Add your selection handler here
   }
 
+  const handleThemeChange = () => {
+    uiStore.toggleTheme()
+    console.log(uiStore.getTheme())
+    // Add your selection handler here
+  }
+
   return (
     <div className="container">
-      {/* <h1>{uiStore.getLanguage()}</h1> */}
+      <ToggleSwitch
+        className="theme-switch"
+        isOn={uiStore.getTheme() === 'light' ? true : false}
+        handleToggle={handleThemeChange}
+        onColor="#e0e0e0"
+        offColor="#333333"
+        onText={Localization.translate('light')}
+        offText={Localization.translate('dark')}
+      />
+
+      <BaseText text={emailEditTextRef?.getStandardText()} />
       <div className="language-dropdown">
-        <label htmlFor="language-select">Select Language:</label>
+        <label htmlFor="language-select">
+          <BaseText text={Localization.translate('selectLanguage')} />
+        </label>
         <select
           id="language-select"
-          // value={uiStore.getLanguage()}
           onChange={handleLanguageChange}
         >
-          <option value="en">English</option>
-          <option value="fa">Persian</option>
+          <option value="en">{Localization.translate('en')}</option>
+          <option value="fa">{Localization.translate('fa')}</option>
         </select>
       </div>
       <div className="box">
         <h2 className="title">{Localization.translate('email')}</h2>
-        <input
+        <EditText
+          ref={(ref) => (emailEditTextRef = ref)}
           className="input"
           type="email"
+          required={true}
           placeholder="example@mail.com"
-          value={email}
-          onChange={handleEmailChange}
         />
       </div>
       <div className="box">
-        <h2 className="title">Password</h2>
-        <input
+        <h2 className="title">{Localization.translate('password')}</h2>
+        <EditText
+          ref={(ref) => (passwordEditTextRef = ref)}
           className="input"
           type="password"
           placeholder="**********"
-          value={password}
-          onChange={handlePasswordChange}
         />
       </div>
       <button
         className="button"
         onClick={handleSubmit}
       >
-        Login
+        <BaseText
+          text={Localization.translate('login')}
+          style={{ color: 'white' }}
+        />
       </button>
     </div>
   )
