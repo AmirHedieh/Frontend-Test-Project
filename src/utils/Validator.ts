@@ -1,7 +1,9 @@
 export class CommonValidator {
   // password regex: just letters and number (min length: 8, max: 25)
-  private static regIsPassword = new RegExp('^[a-zA-Z0-9]{8,25}$')
+  private static regIsPassword = new RegExp('^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$')
   private static regIsPhoneNumber = new RegExp('^09[0-9]{9}$')
+  private static regIsEmail =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   public static isArray(value: readonly any[]): boolean {
     return value != null && value.constructor === Array
@@ -40,6 +42,11 @@ export class CommonValidator {
 
   public static isPassword(c: string): boolean {
     return CommonValidator.isNullOrEmpty(c) ? false : this.regIsPassword.test(c)
+  }
+
+  public static isEmail(c: string): boolean {
+    console.log('checking', c)
+    return CommonValidator.isNullOrEmpty(c) ? false : this.regIsEmail.test(c)
   }
 
   private static regIsPersian = new RegExp(
