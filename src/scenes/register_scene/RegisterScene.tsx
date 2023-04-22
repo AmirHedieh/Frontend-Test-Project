@@ -12,6 +12,9 @@ import { CommonValidator } from '../../utils/Validator'
 import { NormalButton } from '../../components/normal_button/NormalButton'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { useNavigate } from 'react-router-dom'
+import { HttpManager } from '../../network/HttpManager'
+import { Loading } from '../../components/loading/Loading'
+import { GlobalState } from '../../utils/GlobalState'
 
 function RegisterScene() {
   const uiStore = useContext(Stores).getUIStore()
@@ -23,7 +26,35 @@ function RegisterScene() {
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
 
-  const handleSubmit = (event) => {
+  const onRegisterButtonClick = async (event) => {
+    if (validateInputData(event)) {
+      try {
+        setIsLoading(true)
+        await registerUser()
+        setIsLoading(false)
+        navigate('/sales', { replace: true })
+      } catch (e: any) {
+        setErrorMessage(e.message)
+        setIsLoading(false)
+      }
+    }
+  }
+
+  const registerUser = async () => {
+    const response = await HttpManager.getInstance().register({
+      name: nameEditTextRef.getStandardText(),
+      email: emailEditTextRef.getStandardText(),
+      password: passwordEditTextRef.getStandardText(),
+    })
+    if (response.isSuccessful()) {
+      GlobalState.getInstance().setToken(response.getData().accessToken)
+      GlobalState.getInstance().setUser(response.getData().user)
+    } else {
+      setErrorMessage(response.getData())
+    }
+  }
+
+  const validateInputData = (event) => {
     event.preventDefault()
 
     if (
@@ -32,23 +63,21 @@ function RegisterScene() {
       CommonValidator.isNullOrEmpty(nameEditTextRef.getStandardText())
     ) {
       setErrorMessage(Localization.translate('RegisterSceneInputEmptyError'))
-      return
+      return false
     }
 
     if (!CommonValidator.isEmail(emailEditTextRef.getStandardText())) {
       setErrorMessage(Localization.translate('RegisterSceneWrongEmailFormat'))
-      return
+      return false
     }
 
     if (!CommonValidator.isPassword(passwordEditTextRef.getStandardText())) {
       setErrorMessage(Localization.translate('RegisterSceneWrongPasswordFormat'))
-      return
+      return false
     }
 
     setErrorMessage(null)
-
-    console.log('Email:', emailEditTextRef.getStandardText())
-    console.log('Password:', passwordEditTextRef.getStandardText())
+    return true
   }
 
   const handleLanguageChange = (e) => {
@@ -65,6 +94,7 @@ function RegisterScene() {
 
   return (
     <div className="container">
+      {isLoading && <Loading />}
       {/* UI control elements like language and theme */}
 
       <ToggleSwitch
@@ -165,7 +195,7 @@ function RegisterScene() {
         />
       )}
       <NormalButton
-        onClick={handleSubmit}
+        onClick={onRegisterButtonClick}
         text={Localization.translate('RegisterSceneRegister')}
       />
       <div style={GlobalStyles.verticalSpacerSmall} />
