@@ -25,4 +25,5 @@ export const En = {
   RegisterSceneNameError: 'Please Enter Your Name Correctly',
   /** SalesListScene */
   SalesListSceneTitle: 'Sales List',
+  SalesListSceneAddSale: 'Add Sale',
 }

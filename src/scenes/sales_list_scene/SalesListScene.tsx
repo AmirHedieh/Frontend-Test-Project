@@ -8,11 +8,13 @@ import { Localization } from '../../text_process/Localization'
 import { Stores } from '../..'
 import { observer } from 'mobx-react'
 import { FontSizes, GlobalStyles } from '../../GlobalStyles'
-import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { TextStandardization } from '../../text_process/TextStandardization'
+import { NormalButton } from '../../components/normal_button/NormalButton'
+import { useNavigate } from 'react-router-dom'
 
 const SalesListScene: React.FC = () => {
   const uiStore = useContext(Stores).getUIStore()
+  const navigate = useNavigate()
 
   const PAGE_LIMIT = 3
 
@@ -22,17 +24,15 @@ const SalesListScene: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    console.log('use effect')
     const fetchSales = async () => {
       setIsLoading(true)
       const response = await HttpManager.getInstance().getSales({ _page: page, _limit: PAGE_LIMIT })
       setIsLoading(false)
       if (response.isSuccessful()) {
-        console.log(response)
         setSales(response.getData())
         setTotalPages(response.getHeaders()['x-total-count'])
       } else {
-        console.log(response.getData())
+        // TODO: handle resquest failure
       }
     }
     fetchSales()
@@ -40,6 +40,10 @@ const SalesListScene: React.FC = () => {
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage)
+  }
+
+  const onAddSaleClick = () => {
+    navigate('/add-sale')
   }
 
   let pagiantionArr = Array.from({ length: Math.round(totalPages / PAGE_LIMIT) }, (_, index) => index + 1)
@@ -77,6 +81,10 @@ const SalesListScene: React.FC = () => {
               </button>
             ))}
           </div>
+          <NormalButton
+            text={Localization.translate('SalesListSceneAddSale')}
+            onClick={onAddSaleClick}
+          />
         </div>
       )}
     </div>

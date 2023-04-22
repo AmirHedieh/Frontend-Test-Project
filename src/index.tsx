@@ -8,6 +8,7 @@ import LoginScene from './scenes/login_scene/LoginScene'
 import RegisterScene from './scenes/register_scene/RegisterScene'
 import SalesListScene from './scenes/sales_list_scene/SalesListScene'
 import UIController from './components/ui_controller/UIController'
+import AddSaleScene from './scenes/add_sale_scene/AddSaleScene'
 
 if (
   !new (class {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: '/sales',
     element: <SalesListScene />,
+  },
+  {
+    path: '/add-sale',
+    element: <AddSaleScene />,
   },
 ])
 

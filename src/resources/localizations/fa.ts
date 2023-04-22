@@ -25,4 +25,5 @@ export const Fa = {
   RegisterSceneNameError: 'لطفا نام خود را وارد کنید',
   /** SalesListScene */
   SalesListSceneTitle: 'لیست آگهی ها',
+  SalesListSceneAddSale: 'افزودن آگهی',
 }
