@@ -7,12 +7,14 @@ import { BaseText } from '../../components/base_text/BaseText'
 import { Localization } from '../../text_process/Localization'
 import { Stores } from '../..'
 import { observer } from 'mobx-react'
-import { FontSizes } from '../../GlobalStyles'
+import { FontSizes, GlobalStyles } from '../../GlobalStyles'
+import { SafeTouch } from '../../components/safe_touch/SafeTouch'
+import { TextStandardization } from '../../text_process/TextStandardization'
 
 const SalesListScene: React.FC = () => {
   const uiStore = useContext(Stores).getUIStore()
 
-  const PAGE_LIMIT = 2
+  const PAGE_LIMIT = 3
 
   const [sales, setSales] = useState<ISale[]>([])
   const [page, setPage] = useState<number>(1)
@@ -44,24 +46,26 @@ const SalesListScene: React.FC = () => {
   pagiantionArr = uiStore.getLanguage() === 'en' ? pagiantionArr : pagiantionArr.reverse()
 
   return (
-    <div className={styles['container']}>
+    <div className={styles['sales-list-container']}>
       <BaseText
         style={salesListSceneStyles.title}
         text={Localization.translate('SalesListSceneTitle')}
       />
+      <div style={GlobalStyles.verticalSpacerLarge} />
       {isLoading ? (
         <BaseText text={Localization.translate('loading')} />
       ) : (
-        <>
+        <div className={styles['center-container']}>
           <div className={styles['sales-list']}>
             {sales.map((sale) => (
               <SaleCard
                 key={sale.id}
                 title={sale.title}
-                address={sale.address}
+                address={TextStandardization.truncateText(sale.address, 60)}
               />
             ))}
           </div>
+          <div style={GlobalStyles.verticalSpacerSmall} />
           <div className={styles['sales-pagination']}>
             {pagiantionArr.map((pageNumber) => (
               <button
@@ -73,7 +77,7 @@ const SalesListScene: React.FC = () => {
               </button>
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   )
