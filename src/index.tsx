@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals'
 import { RootStore, rootStore } from './mobx/RootStore'
 import LoginScene from './scenes/login_scene/LoginScene'
 import RegisterScene from './scenes/register_scene/RegisterScene'
+import { SalseListScene } from './scenes/sales_list_scene/SalesListScene'
 
 if (
   !new (class {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginScene />,
+  },
+  {
+    path: '/sales',
+    element: <SalseListScene />,
   },
 ])
 

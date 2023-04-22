@@ -25,12 +25,21 @@ export class HttpManager {
     */
 
   public login = async (data: { email: string; password: string }): Promise<CustomResponse> => {
-    return new CustomResponse(
-      await this.axiosNoToken.post('login', {
-        username: data.email,
+    try {
+      const response = await this.axiosNoToken.post('login', {
+        email: data.email,
         password: data.password,
       })
-    )
+      return new CustomResponse(response)
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response)
+        return new CustomResponse(error.response)
+      } else {
+        // handle other errors here
+        throw error
+      }
+    }
   }
 
   public register = async (data: { name: string; email: string; password: string }): Promise<CustomResponse> => {

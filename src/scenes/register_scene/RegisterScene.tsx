@@ -26,13 +26,11 @@ function RegisterScene() {
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
 
-  const onRegisterButtonClick = async (event) => {
+  const onRegisterButtonClick = async (event): Promise<void> => {
     if (validateInputData(event)) {
       try {
         setIsLoading(true)
         await registerUser()
-        setIsLoading(false)
-        navigate('/sales', { replace: true })
       } catch (e: any) {
         setErrorMessage(e.message)
         setIsLoading(false)
@@ -40,21 +38,23 @@ function RegisterScene() {
     }
   }
 
-  const registerUser = async () => {
+  const registerUser = async (): Promise<void> => {
     const response = await HttpManager.getInstance().register({
       name: nameEditTextRef.getStandardText(),
       email: emailEditTextRef.getStandardText(),
       password: passwordEditTextRef.getStandardText(),
     })
+    setIsLoading(false)
     if (response.isSuccessful()) {
       GlobalState.getInstance().setToken(response.getData().accessToken)
       GlobalState.getInstance().setUser(response.getData().user)
+      navigate('/sales', { replace: true })
     } else {
       setErrorMessage(response.getData())
     }
   }
 
-  const validateInputData = (event) => {
+  const validateInputData = (event): boolean => {
     event.preventDefault()
 
     if (
@@ -80,23 +80,23 @@ function RegisterScene() {
     return true
   }
 
-  const handleLanguageChange = (e) => {
+  const handleLanguageChange = (e): void => {
     uiStore.setLanguage(e.target.value)
   }
 
-  const handleThemeChange = () => {
+  const handleThemeChange = (): void => {
     uiStore.toggleTheme()
   }
 
-  const onHaveAccountClick = () => {
+  const onHaveAccountClick = (): void => {
     navigate('/login')
   }
 
   return (
     <div className="container">
       {isLoading && <Loading />}
-      {/* UI control elements like language and theme */}
 
+      {/* UI control elements like language and theme */}
       <ToggleSwitch
         className="theme-switch"
         isOn={uiStore.getTheme() === 'light' ? true : false}

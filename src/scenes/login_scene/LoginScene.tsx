@@ -12,6 +12,9 @@ import { CommonValidator } from '../../utils/Validator'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { useNavigate } from 'react-router-dom'
 import { NormalButton } from '../../components/normal_button/NormalButton'
+import { HttpManager } from '../../network/HttpManager'
+import { GlobalState } from '../../utils/GlobalState'
+import { Loading } from '../../components/loading/Loading'
 
 function LoginScene() {
   const uiStore = useContext(Stores).getUIStore()
@@ -22,7 +25,35 @@ function LoginScene() {
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
 
-  const handleSubmit = (event) => {
+  const onLoginButtonClick = async (event): Promise<void> => {
+    if (validateInputData(event)) {
+      try {
+        setIsLoading(true)
+        await loginUser()
+      } catch (e: any) {
+        console.log(e)
+        setErrorMessage(e.message)
+        setIsLoading(false)
+      }
+    }
+  }
+
+  const loginUser = async (): Promise<void> => {
+    const response = await HttpManager.getInstance().login({
+      email: emailEditTextRef.getStandardText(),
+      password: passwordEditTextRef.getStandardText(),
+    })
+    setIsLoading(false)
+    if (response.isSuccessful()) {
+      GlobalState.getInstance().setToken(response.getData().accessToken)
+      GlobalState.getInstance().setUser(response.getData().user)
+      navigate('/sales', { replace: true })
+    } else {
+      setErrorMessage(response.getData())
+    }
+  }
+
+  const validateInputData = (event): boolean => {
     event.preventDefault()
 
     if (
@@ -30,41 +61,41 @@ function LoginScene() {
       CommonValidator.isNullOrEmpty(passwordEditTextRef.getStandardText())
     ) {
       setErrorMessage(Localization.translate('LoginSceneInputEmptyError'))
-      return
+      return false
     }
 
     if (!CommonValidator.isEmail(emailEditTextRef.getStandardText())) {
       setErrorMessage(Localization.translate('LoginSceneWrongEmailFormat'))
-      return
+      return false
     }
 
     if (!CommonValidator.isPassword(passwordEditTextRef.getStandardText())) {
       setErrorMessage(Localization.translate('LoginSceneWrongPasswordFormat'))
-      return
+      return false
     }
 
     setErrorMessage(null)
 
-    console.log('Email:', emailEditTextRef.getStandardText())
-    console.log('Password:', passwordEditTextRef.getStandardText())
+    return true
   }
 
-  const handleLanguageChange = (e) => {
+  const handleLanguageChange = (e): void => {
     uiStore.setLanguage(e.target.value)
   }
 
-  const handleThemeChange = () => {
+  const handleThemeChange = (): void => {
     uiStore.toggleTheme()
   }
 
-  const onNewAccountClick = () => {
+  const onNewAccountClick = (): void => {
     navigate('/register')
   }
 
   return (
     <div className="container">
-      {/* UI control elements like language and theme */}
+      {isLoading && <Loading />}
 
+      {/* UI control elements like language and theme */}
       <ToggleSwitch
         className="theme-switch"
         isOn={uiStore.getTheme() === 'light' ? true : false}
@@ -82,6 +113,7 @@ function LoginScene() {
         <select
           id="language-select"
           onChange={handleLanguageChange}
+          value={uiStore.getLanguage()}
         >
           <option value="en">{Localization.translate('en')}</option>
           <option value="fa">{Localization.translate('fa')}</option>
@@ -141,7 +173,7 @@ function LoginScene() {
         />
       )}
       <NormalButton
-        onClick={handleSubmit}
+        onClick={onLoginButtonClick}
         text={Localization.translate('LoginSceneLogin')}
       />
       <SafeTouch
