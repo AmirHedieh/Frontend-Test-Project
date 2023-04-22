@@ -11,7 +11,7 @@ import { FontSizes, GlobalStyles } from '../../GlobalStyles'
 import { CommonValidator } from '../../utils/Validator'
 import { NormalButton } from '../../components/normal_button/NormalButton'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function RegisterScene() {
   const uiStore = useContext(Stores).getUIStore()
@@ -150,7 +150,7 @@ function RegisterScene() {
         onClick={onHaveAccountClick}
       >
         <BaseText
-          style={styles.newAccountText}
+          style={styles.haveAccountText}
           text={Localization.translate('RegisterSceneHaveAccount')}
         />
       </SafeTouch>
@@ -175,7 +175,7 @@ const styles = {
     color: 'red',
     fontSize: FontSizes.p,
   },
-  newAccountText: {
+  haveAccountText: {
     fontSize: FontSizes.extraSmall,
     textDecoration: 'underline',
   },

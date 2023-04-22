@@ -9,12 +9,16 @@ import { ToggleSwitch } from '../../components/toggle_switch/ToggleSwitch'
 import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { FontSizes, GlobalStyles } from '../../GlobalStyles'
 import { CommonValidator } from '../../utils/Validator'
+import { SafeTouch } from '../../components/safe_touch/SafeTouch'
+import { useNavigate } from 'react-router-dom'
+import { NormalButton } from '../../components/normal_button/NormalButton'
 
 function LoginScene() {
   const uiStore = useContext(Stores).getUIStore()
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
+  let navigate = useNavigate()
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
 
@@ -53,6 +57,10 @@ function LoginScene() {
     uiStore.toggleTheme()
   }
 
+  const onNewAccountClick = () => {
+    navigate('/register')
+  }
+
   return (
     <div className="container">
       {/* UI control elements like language and theme */}
@@ -80,6 +88,11 @@ function LoginScene() {
         </select>
       </div>
 
+      <BaseText
+        style={styles.pageTitle}
+        text={Localization.translate('LoginSceneLogin')}
+      />
+      <div style={GlobalStyles.verticalSpacerLarge} />
       {/* User input boxes */}
       <div>
         <RTLAwareView style={styles.editTextTitleContainer}>
@@ -127,20 +140,29 @@ function LoginScene() {
           text={errorMessage}
         />
       )}
-      <button
-        className="button"
+      <NormalButton
         onClick={handleSubmit}
+        text={Localization.translate('LoginSceneLogin')}
+      />
+      <SafeTouch
+        className="have-account-button"
+        onClick={onNewAccountClick}
       >
+        <div style={GlobalStyles.verticalSpacerSmall} />
         <BaseText
-          text={Localization.translate('LoginSceneLogin')}
-          style={{ color: 'white' }}
+          style={styles.newAccountText}
+          text={Localization.translate('LoginSceneNewAccount')}
         />
-      </button>
+      </SafeTouch>
     </div>
   )
 }
 
 const styles = {
+  pageTitle: {
+    fontSize: FontSizes.h1,
+    fontWeight: 'bold',
+  },
   editTextTitle: {
     fontSize: FontSizes.p,
     fontWeight: 'bold',
@@ -152,6 +174,10 @@ const styles = {
   inputError: {
     color: 'red',
     fontSize: FontSizes.p,
+  },
+  newAccountText: {
+    fontSize: FontSizes.extraSmall,
+    textDecoration: 'underline',
   },
 }
 

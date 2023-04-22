@@ -8,7 +8,7 @@ export const Fa = {
   LoginSceneLogin: 'ورود',
   LoginSceneEmail: 'ایمیل',
   LoginScenePassword: 'رمز عبور',
-  loginsceneInputEmptyError: 'لطفا ایمیل و رمز عبور خود را وارد کنید',
+  LoginSceneInputEmptyError: 'لطفا ایمیل و رمز عبور خود را وارد کنید',
   LoginSceneWrongEmailFormat: 'ایمیل نامعتبر میباشد',
   LoginSceneWrongPasswordFormat: 'رمز عبور شما باید حداقل شامل 8 حرف باشد',
   LoginSceneNewAccount: 'حساب کاربری ندارید؟',
