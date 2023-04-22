@@ -40,10 +40,10 @@ export const Colors = {
 export const NetworkConfig = {
   // server ip: 194.5.205.176:4000
   // server picture ip: 194.5.205.176:80/pictures
-  apiBaseUrl: 'http://192.168.1.4:8000/api/v1/',
-  httpAPIBaseUrl: 'http://192.168.1.4:8000/api/v1/',
+  apiBaseUrl: 'http://localhost:3000/',
+  httpAPIBaseUrl: 'http://localhost:3000/',
   maxRetry: 3,
   httpRequestTimeout: 5000,
   maxConcurrentConnections: 1,
-  localServerPictureBaseUrl: 'http://192.168.1.4:8000/storage/',
+  localServerPictureBaseUrl: 'localhost:3000/storage/',
 }
