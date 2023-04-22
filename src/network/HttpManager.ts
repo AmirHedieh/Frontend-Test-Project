@@ -24,13 +24,32 @@ export class HttpManager {
     }
     */
 
-  public login = async (data: { username: string; password: string }): Promise<CustomResponse> => {
+  public login = async (data: { email: string; password: string }): Promise<CustomResponse> => {
     return new CustomResponse(
       await this.axiosNoToken.post('login', {
-        username: data.username,
+        username: data.email,
         password: data.password,
       })
     )
+  }
+
+  public register = async (data: { name: string; email: string; password: string }): Promise<CustomResponse> => {
+    try {
+      const response = await this.axiosNoToken.post('register', {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      })
+      return new CustomResponse(response)
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response)
+        return new CustomResponse(error.response)
+      } else {
+        // handle other errors here
+        throw error
+      }
+    }
   }
 
   public getMuseum = async (urlParams: { museumId: number }): Promise<CustomResponse> => {

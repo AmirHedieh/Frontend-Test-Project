@@ -8,13 +8,13 @@ export class CustomResponse {
   private data
 
   constructor(response: IHttpNetworkPromise) {
-    this.code = response.data.status.code
-    this.message = response.data.status.message
-    this.data = response.data.result
+    this.code = response.status
+    this.message = response.statusText
+    this.data = response.data
   }
 
   public isSuccessful() {
-    return this.code === StatusCodes.Backend.success
+    return StatusCodes.Http.successCodes.includes(this.code)
   }
   public getCode() {
     return this.code

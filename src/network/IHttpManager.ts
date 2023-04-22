@@ -1,9 +1,8 @@
+/**
+ * Backend response format interface (Json-auth-server in this project)
+ */
 export interface IHttpNetworkPromise {
-  data: {
-    status: {
-      code: number
-      message: string
-    }
-    result?: any
-  }
+  data: any
+  status: number
+  statusText: string
 }
