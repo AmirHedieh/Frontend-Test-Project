@@ -26,4 +26,15 @@ export const Fa = {
   /** SalesListScene */
   SalesListSceneTitle: 'لیست آگهی ها',
   SalesListSceneAddSale: 'افزودن آگهی',
+  /** AddSaleScene */
+  AddSaleSceneTitlePlaceholder: 'عنوان آگهی',
+  AddSaleSceneAddressPlaceholder: 'جنت آباد شمالی',
+  AddSaleScenePhoneNumberPlaceholder: '09905226632',
+  AddSaleSceneDescriptionPlaceholder: 'توضیحات محصول',
+  AddSaleSceneTitle: 'عنوان',
+  AddSaleScenePhoneNumber: 'شماره تماس',
+  AddSaleSceneAddress: 'آدرس',
+  AddSaleSceneDescription: 'توضیحات',
+  AddSaleSceneAddSaleConfirm: 'تایید',
+  AddSaleScenePageTitle: 'افزودن آگهی',
 }

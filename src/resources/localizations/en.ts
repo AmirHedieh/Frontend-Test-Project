@@ -26,4 +26,15 @@ export const En = {
   /** SalesListScene */
   SalesListSceneTitle: 'Sales List',
   SalesListSceneAddSale: 'Add Sale',
+  /** AddSaleScene */
+  AddSaleSceneTitlePlaceholder: 'Sale Title',
+  AddSaleScenePhoneNumberPlaceholder: '09905226632',
+  AddSaleSceneAddressPlaceholder: 'North Avenue, St.Valiasr',
+  AddSaleSceneDescriptionPlaceholder: 'Sale Description',
+  AddSaleSceneTitle: 'Title',
+  AddSaleScenePhoneNumber: 'Phone Number',
+  AddSaleSceneAddress: 'Address',
+  AddSaleSceneDescription: 'Description',
+  AddSaleSceneAddSaleConfirm: 'Confirm',
+  AddSaleScenePageTitle: 'Add Sale',
 }
