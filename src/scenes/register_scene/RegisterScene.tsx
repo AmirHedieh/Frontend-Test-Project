@@ -13,7 +13,6 @@ import { useNavigate } from 'react-router-dom'
 import { HttpManager } from '../../network/HttpManager'
 import { Loading } from '../../components/loading/Loading'
 import { GlobalState } from '../../utils/GlobalState'
-import { UIController } from '../../components/ui_controller/UIController'
 
 function RegisterScene() {
   const [isLoading, setIsLoading] = useState(false)
@@ -85,8 +84,6 @@ function RegisterScene() {
   return (
     <div className="container">
       {isLoading && <Loading />}
-
-      <UIController />
 
       <BaseText
         style={styles.pageTitle}

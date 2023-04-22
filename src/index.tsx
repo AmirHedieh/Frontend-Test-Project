@@ -2,12 +2,12 @@ import React, { createContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import './index.css'
-import { App } from './App'
 import reportWebVitals from './reportWebVitals'
 import { RootStore, rootStore } from './mobx/RootStore'
 import LoginScene from './scenes/login_scene/LoginScene'
 import RegisterScene from './scenes/register_scene/RegisterScene'
-import { SalesListScene } from './scenes/sales_list_scene/SalesListScene'
+import SalesListScene from './scenes/sales_list_scene/SalesListScene'
+import UIController from './components/ui_controller/UIController'
 
 if (
   !new (class {
@@ -23,7 +23,7 @@ export const Stores = createContext<RootStore>(rootStore)
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to={'/register'} />,
+    element: <Navigate to={'/sales'} />,
   },
   {
     path: '/register',
@@ -42,6 +42,7 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <Stores.Provider value={rootStore}>
+      <UIController />
       <RouterProvider router={router} />
     </Stores.Provider>
   </React.StrictMode>

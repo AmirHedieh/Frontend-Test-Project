@@ -13,7 +13,6 @@ import { NormalButton } from '../../components/normal_button/NormalButton'
 import { HttpManager } from '../../network/HttpManager'
 import { GlobalState } from '../../utils/GlobalState'
 import { Loading } from '../../components/loading/Loading'
-import { UIController } from '../../components/ui_controller/UIController'
 
 function LoginScene() {
   const [isLoading, setIsLoading] = useState(false)
@@ -84,8 +83,6 @@ function LoginScene() {
   return (
     <div className="container">
       {isLoading && <Loading />}
-
-      <UIController />
 
       <BaseText
         style={styles.pageTitle}

@@ -4,6 +4,7 @@ export const En = {
   selectLanguage: 'Select Language: ',
   en: 'EN',
   fa: 'FA',
+  loading: 'Loading...',
   /** Login Scene */
   LoginSceneLogin: 'Login',
   LoginSceneEmail: 'Email',
@@ -22,4 +23,6 @@ export const En = {
   RegisterSceneWrongPasswordFormat: 'Your Password must at least contain 8 characters',
   RegisterSceneHaveAccount: `Already have an account?`,
   RegisterSceneNameError: 'Please Enter Your Name Correctly',
+  /** SalesListScene */
+  SalesListSceneTitle: 'Sales List',
 }

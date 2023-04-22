@@ -4,6 +4,7 @@ export const Fa = {
   selectLanguage: 'زبان انتخابی: ',
   en: 'انگلیسی',
   fa: 'فارسی',
+  loading: 'در حال بارگذاری...',
   /** Login Scene */
   LoginSceneLogin: 'ورود',
   LoginSceneEmail: 'ایمیل',
@@ -22,4 +23,6 @@ export const Fa = {
   RegisterSceneWrongPasswordFormat: 'رمز عبور شما باید حداقل شامل 8 حرف باشد',
   RegisterSceneHaveAccount: 'حساب کاربری دارید؟',
   RegisterSceneNameError: 'لطفا نام خود را وارد کنید',
+  /** SalesListScene */
+  SalesListSceneTitle: 'لیست آگهی ها',
 }

@@ -3,8 +3,9 @@ import { ToggleSwitch } from '../toggle_switch/ToggleSwitch'
 import { Stores } from '../..'
 import { Localization } from '../../text_process/Localization'
 import { BaseText } from '../base_text/BaseText'
+import { observer } from 'mobx-react'
 
-export const UIController: React.FC = () => {
+const UIController: React.FC = () => {
   const uiStore = useContext(Stores).getUIStore()
 
   const handleLanguageChange = (e): void => {
@@ -43,3 +44,5 @@ export const UIController: React.FC = () => {
     </div>
   )
 }
+
+export default observer(UIController)
