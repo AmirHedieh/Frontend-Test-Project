@@ -14,10 +14,12 @@ export const En = {
   LoginSceneNewAccount: `Don't have an account?`,
   /** Register Scene */
   RegisterSceneRegister: 'Register',
+  RegisterSceneName: 'Full Name',
   RegisterSceneEmail: 'Email',
   RegisterScenePassword: 'Password',
-  RegisterSceneInputEmptyError: 'Please Enter Email & Password Correctly',
+  RegisterSceneInputEmptyError: 'Please Enter Your Information Correctly',
   RegisterSceneWrongEmailFormat: 'Invalid Email',
   RegisterSceneWrongPasswordFormat: 'Your Password must at least contain 8 characters',
   RegisterSceneHaveAccount: `Already have an account?`,
+  RegisterSceneNameError: 'Please Enter Your Name Correctly',
 }

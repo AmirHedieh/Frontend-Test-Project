@@ -19,6 +19,7 @@ function RegisterScene() {
   const [errorMessage, setErrorMessage] = useState('')
 
   let navigate = useNavigate()
+  let nameEditTextRef: EditText = null
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
 
@@ -27,7 +28,8 @@ function RegisterScene() {
 
     if (
       CommonValidator.isNullOrEmpty(emailEditTextRef.getStandardText()) ||
-      CommonValidator.isNullOrEmpty(passwordEditTextRef.getStandardText())
+      CommonValidator.isNullOrEmpty(passwordEditTextRef.getStandardText()) ||
+      CommonValidator.isNullOrEmpty(nameEditTextRef.getStandardText())
     ) {
       setErrorMessage(Localization.translate('RegisterSceneInputEmptyError'))
       return
@@ -82,6 +84,7 @@ function RegisterScene() {
         <select
           id="language-select"
           onChange={handleLanguageChange}
+          value={uiStore.getLanguage()}
         >
           <option value="en">{Localization.translate('en')}</option>
           <option value="fa">{Localization.translate('fa')}</option>
@@ -94,6 +97,27 @@ function RegisterScene() {
       />
       <div style={GlobalStyles.verticalSpacerLarge} />
       {/* User input boxes */}
+      <div>
+        <RTLAwareView style={styles.editTextTitleContainer}>
+          <BaseText
+            style={styles.editTextTitle}
+            text={Localization.translate('RegisterSceneName')}
+          />
+          <div style={GlobalStyles.spacer} />
+        </RTLAwareView>
+        <div style={GlobalStyles.verticalSpacerSmall} />
+        <div className="edittext">
+          <EditText
+            ref={(ref) => (nameEditTextRef = ref)}
+            className="input"
+            type="text"
+            maxLength={72}
+            required={true}
+            placeholder="Amir Hedieh"
+          />
+        </div>
+      </div>
+      <div style={GlobalStyles.verticalSpacerLarge} />
       <div>
         <RTLAwareView style={styles.editTextTitleContainer}>
           <BaseText
