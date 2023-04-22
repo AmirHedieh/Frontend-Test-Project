@@ -1,3 +1,4 @@
+import styles from './UIController.module.css'
 import React, { useContext } from 'react'
 import { ToggleSwitch } from '../toggle_switch/ToggleSwitch'
 import { Stores } from '../..'
@@ -19,7 +20,7 @@ const UIController: React.FC = () => {
   return (
     <div>
       <ToggleSwitch
-        className="theme-switch"
+        className={styles['theme-switch']}
         isOn={uiStore.getTheme() === 'light' ? true : false}
         handleToggle={handleThemeChange}
         onColor="#e0e0e0"
@@ -28,7 +29,7 @@ const UIController: React.FC = () => {
         offText={Localization.translate('dark')}
       />
 
-      <div className="language-dropdown">
+      <div className={styles['language-dropdown']}>
         <label htmlFor="language-select">
           <BaseText text={Localization.translate('selectLanguage')} />
         </label>

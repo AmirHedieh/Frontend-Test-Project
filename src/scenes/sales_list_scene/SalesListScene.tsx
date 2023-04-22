@@ -2,11 +2,12 @@ import React, { useState, useEffect, HtmlHTMLAttributes, useContext } from 'reac
 import { ISale } from '../../models/Sale'
 import { HttpManager } from '../../network/HttpManager'
 import { SaleCard } from '../../components/sale_card/SaleCard'
-import './SalesListScene.css'
+import styles from './SalesListScene.module.css'
 import { BaseText } from '../../components/base_text/BaseText'
 import { Localization } from '../../text_process/Localization'
 import { Stores } from '../..'
 import { observer } from 'mobx-react'
+import { FontSizes } from '../../GlobalStyles'
 
 const SalesListScene: React.FC = () => {
   const uiStore = useContext(Stores).getUIStore()
@@ -39,15 +40,20 @@ const SalesListScene: React.FC = () => {
     setPage(newPage)
   }
 
+  let pagiantionArr = Array.from({ length: Math.round(totalPages / PAGE_LIMIT) }, (_, index) => index + 1)
+  pagiantionArr = uiStore.getLanguage() === 'en' ? pagiantionArr : pagiantionArr.reverse()
+
   return (
-    <div className="sales-list-container">
-      <BaseText text={Localization.translate('SalesListSceneTitle')} />
-      <h1 className="sales-list-title">Sales List</h1>
+    <div className={styles['container']}>
+      <BaseText
+        style={salesListSceneStyles.title}
+        text={Localization.translate('SalesListSceneTitle')}
+      />
       {isLoading ? (
         <BaseText text={Localization.translate('loading')} />
       ) : (
         <>
-          <div className="sales-list">
+          <div className={styles['sales-list']}>
             {sales.map((sale) => (
               <SaleCard
                 key={sale.id}
@@ -56,11 +62,11 @@ const SalesListScene: React.FC = () => {
               />
             ))}
           </div>
-          <div className="sales-pagination">
-            {Array.from({ length: Math.round(totalPages / PAGE_LIMIT) }, (_, index) => index + 1).map((pageNumber) => (
+          <div className={styles['sales-pagination']}>
+            {pagiantionArr.map((pageNumber) => (
               <button
                 key={pageNumber}
-                className="sales-pagination-number"
+                className={styles['sales-pagination-number']}
                 onClick={() => handlePageChange(pageNumber)}
               >
                 {pageNumber}
@@ -71,6 +77,13 @@ const SalesListScene: React.FC = () => {
       )}
     </div>
   )
+}
+
+const salesListSceneStyles = {
+  title: {
+    fontWeight: 'bold',
+    fontSize: FontSizes.h1,
+  },
 }
 
 export default observer(SalesListScene)

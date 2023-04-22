@@ -1,0 +1,11 @@
+.theme-switch {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}

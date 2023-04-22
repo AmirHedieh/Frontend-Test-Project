@@ -1,4 +1,4 @@
-import './LoginScene.css'
+import styles from './LoginScene.module.css'
 import { observer } from 'mobx-react'
 import { useState } from 'react'
 import { Localization } from '../../text_process/Localization'
@@ -81,28 +81,28 @@ function LoginScene() {
   }
 
   return (
-    <div className="container">
+    <div className={styles['container']}>
       {isLoading && <Loading />}
 
       <BaseText
-        style={styles.pageTitle}
+        style={loginSceneStyles.pageTitle}
         text={Localization.translate('LoginSceneLogin')}
       />
       <div style={GlobalStyles.verticalSpacerLarge} />
       {/* User input boxes */}
       <div>
-        <RTLAwareView style={styles.editTextTitleContainer}>
+        <RTLAwareView style={loginSceneStyles.editTextTitleContainer}>
           <BaseText
-            style={styles.editTextTitle}
+            style={loginSceneStyles.editTextTitle}
             text={Localization.translate('LoginSceneEmail')}
           />
           <div style={GlobalStyles.spacer} />
         </RTLAwareView>
         <div style={GlobalStyles.verticalSpacerSmall} />
-        <div className="edittext">
+        <div className={styles['edittext']}>
           <EditText
             ref={(ref) => (emailEditTextRef = ref)}
-            className="input"
+            className={styles['input']}
             type="email"
             maxLength={72}
             required={true}
@@ -112,18 +112,18 @@ function LoginScene() {
       </div>
       <div style={GlobalStyles.verticalSpacerLarge} />
       <div>
-        <RTLAwareView style={styles.editTextTitleContainer}>
+        <RTLAwareView style={loginSceneStyles.editTextTitleContainer}>
           <BaseText
-            style={styles.editTextTitle}
+            style={loginSceneStyles.editTextTitle}
             text={Localization.translate('LoginScenePassword')}
           />
           <div style={GlobalStyles.spacer} />
         </RTLAwareView>
         <div style={GlobalStyles.verticalSpacerSmall} />
-        <div className="edittext">
+        <div className={styles['edittext']}>
           <EditText
             ref={(ref) => (passwordEditTextRef = ref)}
-            className="input"
+            className={styles['input']}
             type="password"
             placeholder="**********"
           />
@@ -132,7 +132,7 @@ function LoginScene() {
       <div style={GlobalStyles.verticalSpacerMedium} />
       {errorMessage && (
         <BaseText
-          style={styles.inputError}
+          style={loginSceneStyles.inputError}
           text={errorMessage}
         />
       )}
@@ -141,12 +141,12 @@ function LoginScene() {
         text={Localization.translate('LoginSceneLogin')}
       />
       <SafeTouch
-        className="have-account-button"
+        className={styles['have-account-button']}
         onClick={onNewAccountClick}
       >
         <div style={GlobalStyles.verticalSpacerSmall} />
         <BaseText
-          style={styles.newAccountText}
+          style={loginSceneStyles.newAccountText}
           text={Localization.translate('LoginSceneNewAccount')}
         />
       </SafeTouch>
@@ -154,7 +154,7 @@ function LoginScene() {
   )
 }
 
-const styles = {
+const loginSceneStyles = {
   pageTitle: {
     fontSize: FontSizes.h1,
     fontWeight: 'bold',

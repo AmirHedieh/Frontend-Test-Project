@@ -1,4 +1,4 @@
-import './RegisterScene.css'
+import styles from './RegisterScene.module.css'
 import { observer } from 'mobx-react'
 import { useState } from 'react'
 import { Localization } from '../../text_process/Localization'
@@ -82,25 +82,25 @@ function RegisterScene() {
   }
 
   return (
-    <div className="container">
+    <div className={styles['container']}>
       {isLoading && <Loading />}
 
       <BaseText
-        style={styles.pageTitle}
+        style={registerSceneStyles.pageTitle}
         text={Localization.translate('RegisterSceneRegister')}
       />
       <div style={GlobalStyles.verticalSpacerLarge} />
       {/* User input boxes */}
       <div>
-        <RTLAwareView style={styles.editTextTitleContainer}>
+        <RTLAwareView style={registerSceneStyles.editTextTitleContainer}>
           <BaseText
-            style={styles.editTextTitle}
+            style={registerSceneStyles.editTextTitle}
             text={Localization.translate('RegisterSceneName')}
           />
           <div style={GlobalStyles.spacer} />
         </RTLAwareView>
         <div style={GlobalStyles.verticalSpacerSmall} />
-        <div className="edittext">
+        <div className={styles['edittext']}>
           <EditText
             ref={(ref) => (nameEditTextRef = ref)}
             className="input"
@@ -113,15 +113,15 @@ function RegisterScene() {
       </div>
       <div style={GlobalStyles.verticalSpacerLarge} />
       <div>
-        <RTLAwareView style={styles.editTextTitleContainer}>
+        <RTLAwareView style={registerSceneStyles.editTextTitleContainer}>
           <BaseText
-            style={styles.editTextTitle}
+            style={registerSceneStyles.editTextTitle}
             text={Localization.translate('RegisterSceneEmail')}
           />
           <div style={GlobalStyles.spacer} />
         </RTLAwareView>
         <div style={GlobalStyles.verticalSpacerSmall} />
-        <div className="edittext">
+        <div className={styles['edittext']}>
           <EditText
             ref={(ref) => (emailEditTextRef = ref)}
             className="input"
@@ -134,15 +134,15 @@ function RegisterScene() {
       </div>
       <div style={GlobalStyles.verticalSpacerLarge} />
       <div>
-        <RTLAwareView style={styles.editTextTitleContainer}>
+        <RTLAwareView style={registerSceneStyles.editTextTitleContainer}>
           <BaseText
-            style={styles.editTextTitle}
+            style={registerSceneStyles.editTextTitle}
             text={Localization.translate('RegisterScenePassword')}
           />
           <div style={GlobalStyles.spacer} />
         </RTLAwareView>
         <div style={GlobalStyles.verticalSpacerSmall} />
-        <div className="edittext">
+        <div className={styles['edittext']}>
           <EditText
             ref={(ref) => (passwordEditTextRef = ref)}
             className="input"
@@ -154,7 +154,7 @@ function RegisterScene() {
       <div style={GlobalStyles.verticalSpacerMedium} />
       {errorMessage && (
         <BaseText
-          style={styles.inputError}
+          style={registerSceneStyles.inputError}
           text={errorMessage}
         />
       )}
@@ -168,7 +168,7 @@ function RegisterScene() {
         onClick={onHaveAccountClick}
       >
         <BaseText
-          style={styles.haveAccountText}
+          style={registerSceneStyles.haveAccountText}
           text={Localization.translate('RegisterSceneHaveAccount')}
         />
       </SafeTouch>
@@ -176,7 +176,7 @@ function RegisterScene() {
   )
 }
 
-const styles = {
+const registerSceneStyles = {
   pageTitle: {
     fontSize: FontSizes.h1,
     fontWeight: 'bold',

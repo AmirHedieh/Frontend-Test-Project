@@ -1,8 +1,6 @@
 import React from 'react'
-import './ToggleSwitch.css'
+import styles from './ToggleSwitch.module.css'
 import { BaseText } from '../base_text/BaseText'
-import classNames from 'classnames'
-import { FontSizes } from '../../GlobalStyles'
 
 interface IToggleSwitchProps {
   className?: string
@@ -29,16 +27,16 @@ export const ToggleSwitch: React.FC<IToggleSwitchProps> = ({
       <input
         checked={isOn}
         onChange={handleToggle}
-        className={classNames('react-switch-checkbox')}
+        className={styles['react-switch-checkbox']}
         id={`react-switch-new`}
         type="checkbox"
       />
       <label
         style={{ background: isOn ? onColor : offColor }}
-        className="react-switch-label"
+        className={styles['react-switch-label']}
         htmlFor={`react-switch-new`}
       >
-        <span className={`react-switch-button`} />
+        <span className={styles['react-switch-button']} />
         {!isOn && <div style={{ flex: 1 }} />}
         <BaseText
           style={{ paddingLeft: 12, paddingRight: 12, color: textColor, fontSize: 12, userSelect: 'none' }}

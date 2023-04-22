@@ -1,10 +1,10 @@
 import React from 'react'
-import './Loading.css'
+import styles from './Loading.module.css'
 
 export const Loading = () => {
   return (
-    <div className="loading-container">
-      <div className="loading-spinner"></div>
+    <div className={styles['loading-container']}>
+      <div className={styles['loading-spinner']}></div>
     </div>
   )
 }

@@ -1,5 +1,5 @@
+import styles from './SaleCard.module.css'
 import React from 'react'
-import './SaleCard.css'
 import { BaseText } from '../base_text/BaseText'
 
 interface ISaleCardProps {
@@ -9,11 +9,11 @@ interface ISaleCardProps {
 
 export const SaleCard: React.FC<ISaleCardProps> = ({ title, address }) => {
   return (
-    <div className="card">
-      <div className="card-title">
+    <div className={styles['card']}>
+      <div className={styles['card-title']}>
         <BaseText text={title} />
       </div>
-      <div className="card-address">
+      <div className={styles['card-address']}>
         <BaseText text={address} />
       </div>
     </div>
