@@ -9,12 +9,16 @@ import { ToggleSwitch } from '../../components/toggle_switch/ToggleSwitch'
 import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { FontSizes, GlobalStyles } from '../../GlobalStyles'
 import { CommonValidator } from '../../utils/Validator'
+import { NormalButton } from '../../components/normal_button/NormalButton'
+import { SafeTouch } from '../../components/safe_touch/SafeTouch'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 function RegisterScene() {
   const uiStore = useContext(Stores).getUIStore()
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
+  let navigate = useNavigate()
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
 
@@ -51,6 +55,10 @@ function RegisterScene() {
 
   const handleThemeChange = () => {
     uiStore.toggleTheme()
+  }
+
+  const onHaveAccountClick = () => {
+    navigate('/login')
   }
 
   return (
@@ -132,15 +140,20 @@ function RegisterScene() {
           text={errorMessage}
         />
       )}
-      <button
-        className="button"
+      <NormalButton
         onClick={handleSubmit}
+        text={Localization.translate('RegisterSceneRegister')}
+      />
+      <div style={GlobalStyles.verticalSpacerSmall} />
+      <SafeTouch
+        className="have-account-button"
+        onClick={onHaveAccountClick}
       >
         <BaseText
-          text={Localization.translate('RegisterSceneRegister')}
-          style={{ color: 'white' }}
+          style={styles.newAccountText}
+          text={Localization.translate('RegisterSceneHaveAccount')}
         />
-      </button>
+      </SafeTouch>
     </div>
   )
 }
@@ -161,6 +174,10 @@ const styles = {
   inputError: {
     color: 'red',
     fontSize: FontSizes.p,
+  },
+  newAccountText: {
+    fontSize: FontSizes.extraSmall,
+    textDecoration: 'underline',
   },
 }
 
