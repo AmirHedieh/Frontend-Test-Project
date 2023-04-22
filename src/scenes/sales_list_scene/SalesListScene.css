@@ -1,0 +1,43 @@
+.sales-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sales-list-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.sales-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.sales-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.sales-pagination-number {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+  background-color: #ccc;
+  color: #fff;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sales-pagination-number:hover {
+  background-color: #333;
+}

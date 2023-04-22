@@ -1,10 +1,16 @@
-import React, { useState, useEffect, HtmlHTMLAttributes } from 'react'
+import React, { useState, useEffect, HtmlHTMLAttributes, useContext } from 'react'
 import { ISale } from '../../models/Sale'
 import { HttpManager } from '../../network/HttpManager'
 import { SaleCard } from '../../components/sale_card/SaleCard'
-import { Loading } from '../../components/loading/Loading'
+import './SalesListScene.css'
+import { BaseText } from '../../components/base_text/BaseText'
+import { Localization } from '../../text_process/Localization'
+import { Stores } from '../..'
+import { observer } from 'mobx-react'
 
-export const SalesListScene: React.FC = () => {
+const SalesListScene: React.FC = () => {
+  const uiStore = useContext(Stores).getUIStore()
+
   const PAGE_LIMIT = 2
 
   const [sales, setSales] = useState<ISale[]>([])
@@ -34,22 +40,27 @@ export const SalesListScene: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="sales-list-container">
+      <BaseText text={Localization.translate('SalesListSceneTitle')} />
+      <h1 className="sales-list-title">Sales List</h1>
       {isLoading ? (
-        <Loading />
+        <BaseText text={Localization.translate('loading')} />
       ) : (
         <>
-          {sales.map((sale) => (
-            <SaleCard
-              key={sale.id}
-              title={sale.title}
-              address={sale.address}
-            />
-          ))}
-          <div>
+          <div className="sales-list">
+            {sales.map((sale) => (
+              <SaleCard
+                key={sale.id}
+                title={sale.title}
+                address={sale.address}
+              />
+            ))}
+          </div>
+          <div className="sales-pagination">
             {Array.from({ length: Math.round(totalPages / PAGE_LIMIT) }, (_, index) => index + 1).map((pageNumber) => (
               <button
                 key={pageNumber}
+                className="sales-pagination-number"
                 onClick={() => handlePageChange(pageNumber)}
               >
                 {pageNumber}
@@ -61,3 +72,5 @@ export const SalesListScene: React.FC = () => {
     </div>
   )
 }
+
+export default observer(SalesListScene)
