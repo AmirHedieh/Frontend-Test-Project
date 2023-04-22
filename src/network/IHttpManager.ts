@@ -5,4 +5,5 @@ export interface IHttpNetworkPromise {
   data: any
   status: number
   statusText: string
+  headers: any
 }

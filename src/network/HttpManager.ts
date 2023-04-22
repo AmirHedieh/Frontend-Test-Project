@@ -225,8 +225,18 @@ export class HttpManager {
     )
   }
 
-  public getBeacons = async (params: { major?: number; minor?: number }): Promise<CustomResponse> => {
-    return new CustomResponse(await this.axiosNoToken.get(`beacons`, params))
+  public getSales = async (params: { _page?: number; _limit?: number }): Promise<CustomResponse> => {
+    try {
+      return new CustomResponse(await this.axiosWithToken.get(`sales`, params))
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response)
+        return new CustomResponse(error.response)
+      } else {
+        // handle other errors here
+        throw error
+      }
+    }
   }
 
   // public uploadPhoto = async (data: FormData): Promise<CustomResponse> => {

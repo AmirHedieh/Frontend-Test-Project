@@ -1,11 +1,11 @@
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import { NetworkConfig } from '../utils/Constants'
 import { GlobalState } from '../utils/GlobalState'
 
 type IType = 'withToken' | 'noToken' | 'fileUpload' | 'mapSearch'
 
 class AxiosWrapper {
-  private instance = null
+  private instance: AxiosInstance = null
   constructor(options: any) {
     this.instance = axios.create(options)
   }
