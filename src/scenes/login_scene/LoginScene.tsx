@@ -1,11 +1,9 @@
 import './LoginScene.css'
 import { observer } from 'mobx-react'
-import { useState, useContext, createRef } from 'react'
-import { Stores } from '../..'
+import { useState } from 'react'
 import { Localization } from '../../text_process/Localization'
 import { BaseText } from '../../components/base_text/BaseText'
 import { EditText } from '../../components/edit_text/EditText'
-import { ToggleSwitch } from '../../components/toggle_switch/ToggleSwitch'
 import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { FontSizes, GlobalStyles } from '../../GlobalStyles'
 import { CommonValidator } from '../../utils/Validator'
@@ -15,9 +13,9 @@ import { NormalButton } from '../../components/normal_button/NormalButton'
 import { HttpManager } from '../../network/HttpManager'
 import { GlobalState } from '../../utils/GlobalState'
 import { Loading } from '../../components/loading/Loading'
+import { UIController } from '../../components/ui_controller/UIController'
 
 function LoginScene() {
-  const uiStore = useContext(Stores).getUIStore()
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -79,14 +77,6 @@ function LoginScene() {
     return true
   }
 
-  const handleLanguageChange = (e): void => {
-    uiStore.setLanguage(e.target.value)
-  }
-
-  const handleThemeChange = (): void => {
-    uiStore.toggleTheme()
-  }
-
   const onNewAccountClick = (): void => {
     navigate('/register')
   }
@@ -95,30 +85,7 @@ function LoginScene() {
     <div className="container">
       {isLoading && <Loading />}
 
-      {/* UI control elements like language and theme */}
-      <ToggleSwitch
-        className="theme-switch"
-        isOn={uiStore.getTheme() === 'light' ? true : false}
-        handleToggle={handleThemeChange}
-        onColor="#e0e0e0"
-        offColor="#333333"
-        onText={Localization.translate('light')}
-        offText={Localization.translate('dark')}
-      />
-
-      <div className="language-dropdown">
-        <label htmlFor="language-select">
-          <BaseText text={Localization.translate('selectLanguage')} />
-        </label>
-        <select
-          id="language-select"
-          onChange={handleLanguageChange}
-          value={uiStore.getLanguage()}
-        >
-          <option value="en">{Localization.translate('en')}</option>
-          <option value="fa">{Localization.translate('fa')}</option>
-        </select>
-      </div>
+      <UIController />
 
       <BaseText
         style={styles.pageTitle}
