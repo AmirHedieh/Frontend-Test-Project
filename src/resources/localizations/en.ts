@@ -35,7 +35,7 @@ export const En = {
   AddSaleSceneAddressPlaceholder: 'North Avenue, St.Valiasr',
   AddSaleSceneDescriptionPlaceholder: 'Sale Description',
   AddSaleSceneTitle: 'Title',
-  AddSaleScenePhoneNumber: 'Phone Number',
+  AddSaleScenePhoneNumber: 'Phone Number(Mobile)',
   AddSaleSceneAddress: 'Address',
   AddSaleSceneDescription: 'Description',
   AddSaleSceneAddSaleConfirm: 'Confirm',
