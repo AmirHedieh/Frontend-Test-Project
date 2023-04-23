@@ -59,6 +59,9 @@ if (storedAccessToken && storedUser) {
   GlobalState.getInstance().setUser(JSON.parse(storedUser))
 }
 
+{
+  /** disable <React.StrictMode> to avoid components double render */
+}
 root.render(
   <React.StrictMode>
     <Stores.Provider value={rootStore}>
