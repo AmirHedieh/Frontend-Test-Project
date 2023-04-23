@@ -37,4 +37,5 @@ export const En = {
   AddSaleSceneDescription: 'Description',
   AddSaleSceneAddSaleConfirm: 'Confirm',
   AddSaleScenePageTitle: 'Add Sale',
+  AddSaleSceneAutoLocation: 'Auto Location Pick',
 }

@@ -37,4 +37,5 @@ export const Fa = {
   AddSaleSceneDescription: 'توضیحات',
   AddSaleSceneAddSaleConfirm: 'تایید',
   AddSaleScenePageTitle: 'افزودن آگهی',
+  AddSaleSceneAutoLocation: 'موقعیت یابی خودکار',
 }

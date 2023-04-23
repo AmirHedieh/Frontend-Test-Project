@@ -24,7 +24,7 @@ export const Stores = createContext<RootStore>(rootStore)
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to={'/sales'} />,
+    element: <Navigate to={'/add-sale'} />,
   },
   {
     path: '/register',

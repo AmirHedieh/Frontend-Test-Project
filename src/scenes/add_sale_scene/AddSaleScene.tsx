@@ -7,6 +7,9 @@ import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { BaseText } from '../../components/base_text/BaseText'
 import { FontSizes, GlobalStyles } from '../../GlobalStyles'
 import { NormalButton } from '../../components/normal_button/NormalButton'
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
+import './Leaflet.css'
+import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 
 const AddSaleScene: React.FC = () => {
   let titleEditTextRef: EditText = null
@@ -15,6 +18,8 @@ const AddSaleScene: React.FC = () => {
   let descriptionEditTextRef: EditText = null
 
   const onAddSaleClick = () => {}
+
+  const onAutoLocationClick = () => {}
 
   return (
     <div className={styles['container']}>
@@ -112,10 +117,82 @@ const AddSaleScene: React.FC = () => {
           />
         </div>
       </div>
+      <div style={GlobalStyles.verticalSpacerLarge} />
+
+      <MapContainer
+        center={[51.505, -0.09]}
+        zoom={13}
+        scrollWheelZoom={false}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[51.505, -0.09]}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
+      <SafeTouch onClick={onAutoLocationClick}>
+        <BaseText
+          style={addSaleSceneStyles.autoLocation}
+          text={Localization.translate('AddSaleSceneAutoLocation')}
+        />
+      </SafeTouch>
+      <div style={GlobalStyles.verticalSpacerLarge} />
+
       <NormalButton
         text={Localization.translate('AddSaleSceneAddSaleConfirm')}
         onClick={onAddSaleClick}
       />
+      <div style={GlobalStyles.verticalSpacerLarge} />
+
+      {/* <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      />
+      <NormalButton
+        text={Localization.translate('AddSaleSceneAddSaleConfirm')}
+        onClick={onAddSaleClick}
+      /> */}
     </div>
   )
 }
@@ -136,6 +213,10 @@ const addSaleSceneStyles = {
   inputError: {
     color: 'red',
     fontSize: FontSizes.p,
+  },
+  autoLocation: {
+    fontSize: FontSizes.extraSmall,
+    textDecoration: 'underline',
   },
 }
 
