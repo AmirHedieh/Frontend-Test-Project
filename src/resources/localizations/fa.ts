@@ -38,4 +38,6 @@ export const Fa = {
   AddSaleSceneAddSaleConfirm: 'تایید',
   AddSaleScenePageTitle: 'افزودن آگهی',
   AddSaleSceneAutoLocation: 'موقعیت یابی خودکار',
+  AddSaleSceneYouAreHere: 'شما اینجا هستید',
+  AddSaleScenePickLocationGuide: 'لطفا موقعیت خود را مشخص کنید\n(در صورت داشتن VPN آن را خاموش کنید)',
 }

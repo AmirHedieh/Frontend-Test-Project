@@ -38,4 +38,6 @@ export const En = {
   AddSaleSceneAddSaleConfirm: 'Confirm',
   AddSaleScenePageTitle: 'Add Sale',
   AddSaleSceneAutoLocation: 'Auto Location Pick',
+  AddSaleSceneYouAreHere: 'You Are Here',
+  AddSaleScenePickLocationGuide: `Please Select Your Location\n(Make sure not to have VPN on)`,
 }
