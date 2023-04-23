@@ -1,3 +1,8 @@
+/**
+ * module provides a collection of static methods for validating various types of data.
+ * These methods can be used throughout an application to ensure that user input, database values,
+ * and other types of data meet certain requirements.
+ */
 export class CommonValidator {
   // password regex: just letters and number (min length: 8, max: 25)
   private static regIsPassword = new RegExp('^.{8,32}$')

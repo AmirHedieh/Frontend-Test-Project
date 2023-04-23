@@ -19,6 +19,7 @@ function RegisterScene() {
   const [errorMessage, setErrorMessage] = useState('')
 
   let navigate = useNavigate()
+
   let nameEditTextRef: EditText = null
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
@@ -41,7 +42,9 @@ function RegisterScene() {
       email: emailEditTextRef.getStandardText(),
       password: passwordEditTextRef.getStandardText(),
     })
+
     setIsLoading(false)
+
     if (response.isSuccessful()) {
       GlobalState.getInstance().setToken(response.getData().accessToken)
       GlobalState.getInstance().setUser(response.getData().user)

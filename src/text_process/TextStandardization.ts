@@ -1,3 +1,6 @@
+/**
+ * A utility class for standardizing text
+ */
 export class TextStandardization {
   public static transformNumbers = (text: string) => {
     return text

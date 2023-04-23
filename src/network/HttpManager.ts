@@ -2,6 +2,10 @@ import { ILocation, sortDirection } from '../Types'
 import { axiosFactory } from '../network/AxiosWrapper'
 import { CustomResponse } from './CustomResponse'
 
+/**
+ * HttpManager is a module that provides a set of methods to make HTTP requests to the backend server
+ * and return a custom response instance of the response. This module uses axios wrapper for HTTP requests.
+ */
 export class HttpManager {
   public static getInstance(): HttpManager {
     if (HttpManager.instance == null) {

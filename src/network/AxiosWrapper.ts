@@ -4,6 +4,9 @@ import { GlobalState } from '../utils/GlobalState'
 
 type IType = 'withToken' | 'noToken' | 'fileUpload' | 'mapSearch'
 
+/**
+ * The AxiosWrapper class is a wrapper around the Axios HTTP client library, which simplifies the process of making HTTP requests to a server.
+ */
 class AxiosWrapper {
   private instance: AxiosInstance = null
   constructor(options: any) {

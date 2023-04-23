@@ -20,6 +20,7 @@ function LoginScene() {
   const [errorMessage, setErrorMessage] = useState('')
 
   let navigate = useNavigate()
+
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
 
@@ -41,7 +42,9 @@ function LoginScene() {
       email: emailEditTextRef.getStandardText(),
       password: passwordEditTextRef.getStandardText(),
     })
+
     setIsLoading(false)
+
     if (response.isSuccessful()) {
       GlobalState.getInstance().setToken(response.getData().accessToken)
       GlobalState.getInstance().setUser(response.getData().user)

@@ -4,6 +4,9 @@ import { En } from '../resources/localizations/en'
 import { Fa } from '../resources/localizations/fa'
 import { CommonValidator } from '../utils/Validator'
 
+/**
+ * Provides utility methods for translating messages, formatting numbers to prices, and translating HTTP status codes to localized error messages
+ */
 export class Localization {
   public static translate(key: string, args?: string[]): string {
     let output: string
