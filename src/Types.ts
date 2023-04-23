@@ -14,3 +14,7 @@ export type User = {
   name: string
   email: string
 }
+
+export interface StylesType {
+  [Key: string]: React.CSSProperties
+}
