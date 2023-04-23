@@ -6,6 +6,7 @@ export const En = {
   fa: 'FA',
   loading: 'Loading...',
   invalid: 'Invalid',
+  logout: 'Logout',
   /** Login Scene */
   LoginSceneLogin: 'Login',
   LoginSceneEmail: 'Email',

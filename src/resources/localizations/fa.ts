@@ -6,6 +6,7 @@ export const Fa = {
   fa: 'فارسی',
   loading: 'در حال بارگذاری...',
   invalid: 'نامعتبر',
+  logout: 'خروج از حساب کاربری',
   /** Login Scene */
   LoginSceneLogin: 'ورود',
   LoginSceneEmail: 'ایمیل',

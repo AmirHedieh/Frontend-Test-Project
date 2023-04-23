@@ -182,7 +182,7 @@ const AddSaleScene: React.FC = () => {
             ref={(ref) => (phoneNumberEditTextRef = ref)}
             className="input"
             type="text"
-            maxLength={72}
+            maxLength={11}
             required={true}
             placeholder={Localization.translate('AddSaleScenePhoneNumberPlaceholder')}
           />
@@ -212,7 +212,7 @@ const AddSaleScene: React.FC = () => {
             ref={(ref) => (addressEditTextRef = ref)}
             className="input"
             type="text"
-            maxLength={72}
+            maxLength={200}
             required={true}
             placeholder={Localization.translate('AddSaleSceneAddressPlaceholder')}
           />
@@ -242,7 +242,7 @@ const AddSaleScene: React.FC = () => {
             ref={(ref) => (descriptionEditTextRef = ref)}
             className="input"
             type="text"
-            maxLength={72}
+            maxLength={500}
             required={true}
             placeholder={Localization.translate('AddSaleSceneDescriptionPlaceholder')}
           />

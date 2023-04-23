@@ -12,6 +12,7 @@ import { TextStandardization } from '../../text_process/TextStandardization'
 import { NormalButton } from '../../components/normal_button/NormalButton'
 import { useNavigate } from 'react-router-dom'
 import { StylesType } from '../../Types'
+import UserController from '../../components/user_controller/UserController'
 
 const SalesListScene: React.FC = () => {
   const uiStore = useContext(Stores).getUIStore()
@@ -57,6 +58,7 @@ const SalesListScene: React.FC = () => {
 
   return (
     <div className={styles['sales-list-container']}>
+      <UserController />
       <BaseText
         style={salesListSceneStyles.title}
         text={Localization.translate('SalesListSceneTitle')}
