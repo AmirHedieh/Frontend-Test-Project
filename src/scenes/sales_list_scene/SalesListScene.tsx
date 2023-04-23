@@ -13,8 +13,10 @@ import { NormalButton } from '../../components/normal_button/NormalButton'
 import { useNavigate } from 'react-router-dom'
 import { StylesType } from '../../Types'
 import UserController from '../../components/user_controller/UserController'
+import { GlobalState } from '../../utils/GlobalState'
 
 const SalesListScene: React.FC = () => {
+  console.log(GlobalState.getInstance().getUser())
   const uiStore = useContext(Stores).getUIStore()
   const navigate = useNavigate()
 
@@ -53,7 +55,10 @@ const SalesListScene: React.FC = () => {
     navigate('/add-sale')
   }
 
-  let pagiantionArr = Array.from({ length: Math.round(totalPages / PAGE_LIMIT) }, (_, index) => index + 1)
+  let pagiantionArr = Array.from(
+    { length: totalPages / PAGE_LIMIT + (totalPages % PAGE_LIMIT ? 1 : 0) },
+    (_, index) => index + 1
+  )
   pagiantionArr = uiStore.getLanguage() === 'en' ? pagiantionArr : pagiantionArr.reverse()
 
   return (

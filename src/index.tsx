@@ -9,6 +9,7 @@ import RegisterScene from './scenes/register_scene/RegisterScene'
 import SalesListScene from './scenes/sales_list_scene/SalesListScene'
 import UIController from './components/ui_controller/UIController'
 import AddSaleScene from './scenes/add_sale_scene/AddSaleScene'
+import { GlobalState } from './utils/GlobalState'
 
 if (
   !new (class {
@@ -21,10 +22,13 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 export const Stores = createContext<RootStore>(rootStore)
 
+const storedAccessToken = localStorage.getItem('accessToken')
+const storedUser = localStorage.getItem('user')
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to={'/add-sale'} />,
+    element: <Navigate to={'/register'} />,
   },
   {
     path: '/register',
@@ -43,6 +47,12 @@ const router = createBrowserRouter([
     element: <AddSaleScene />,
   },
 ])
+
+if (storedAccessToken && storedUser) {
+  // Set the user data in GlobalState
+  GlobalState.getInstance().setToken(storedAccessToken)
+  GlobalState.getInstance().setUser(JSON.parse(storedUser))
+}
 
 root.render(
   <React.StrictMode>

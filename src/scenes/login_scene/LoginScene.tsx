@@ -45,6 +45,10 @@ function LoginScene() {
     if (response.isSuccessful()) {
       GlobalState.getInstance().setToken(response.getData().accessToken)
       GlobalState.getInstance().setUser(response.getData().user)
+
+      localStorage.setItem('accessToken', response.getData().accessToken)
+      localStorage.setItem('user', JSON.stringify(response.getData().user))
+
       navigate('/sales', { replace: true })
     } else {
       setErrorMessage(response.getData())

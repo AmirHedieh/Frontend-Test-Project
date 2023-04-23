@@ -15,6 +15,10 @@ const UserController: React.FC = () => {
   const logout = (): void => {
     GlobalState.getInstance().setToken(null)
     GlobalState.getInstance().setUser(null)
+
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('user')
+
     navigate('/login', { replace: true })
   }
 
