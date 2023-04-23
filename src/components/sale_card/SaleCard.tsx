@@ -2,6 +2,7 @@ import styles from './SaleCard.module.css'
 import React from 'react'
 import { BaseText } from '../base_text/BaseText'
 import { FontSizes, GlobalStyles } from '../../GlobalStyles'
+import { StylesType } from '../../Types'
 
 interface ISaleCardProps {
   title: string
@@ -30,7 +31,7 @@ export const SaleCard: React.FC<ISaleCardProps> = ({ title, address }) => {
   )
 }
 
-const saleCardStyles = {
+const saleCardStyles: StylesType = {
   title: {
     fontWeight: 'bold',
   },

@@ -1,6 +1,6 @@
 import styles from './AddSaleScene.module.css'
 import { observer } from 'mobx-react'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { CSSProperties, useEffect, useRef, useState } from 'react'
 import { EditText } from '../../components/edit_text/EditText'
 import { Localization } from '../../text_process/Localization'
 import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
@@ -13,7 +13,7 @@ import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { Map } from 'leaflet'
 import { CommonValidator } from '../../utils/Validator'
 import { HttpManager } from '../../network/HttpManager'
-import { ILocation } from '../../Types'
+import { ILocation, StylesType } from '../../Types'
 import { title } from 'process'
 import { useNavigate } from 'react-router-dom'
 import { Loading } from '../../components/loading/Loading'
@@ -26,6 +26,7 @@ const AddSaleScene: React.FC = () => {
   const [position, setPosition] = useState<ILocation>({ lat: 35.7, lng: 51.3 })
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
 
   const [requestErrorMessage, setRequestErrorMessage] = useState('')
   const [titleErrorMessage, setTitleErrorMessage] = useState('')
@@ -48,20 +49,30 @@ const AddSaleScene: React.FC = () => {
   }
 
   const addSale = async (): Promise<void> => {
-    const response = await HttpManager.getInstance().addSale({
-      title: titleEditTextRef.getStandardText(),
-      phoneNumber: phoneNumberEditTextRef.getStandardText(),
-      address: addressEditTextRef.getStandardText(),
-      description: descriptionEditTextRef.getStandardText(),
-      location: position,
-      userId: GlobalState.getInstance().getUser().id,
-    })
-    setIsLoading(false)
-    if (response.isSuccessful()) {
-      navigate('/sales', { replace: true })
-    } else {
-      setRequestErrorMessage(response.getData())
-    }
+    setIsVisible(true)
+    setTimeout(() => {
+      setIsVisible(false)
+      // navigate('/sales', { replace: true })
+    }, 1000)
+    // const response = await HttpManager.getInstance().addSale({
+    //   title: titleEditTextRef.getStandardText(),
+    //   phoneNumber: phoneNumberEditTextRef.getStandardText(),
+    //   address: addressEditTextRef.getStandardText(),
+    //   description: descriptionEditTextRef.getStandardText(),
+    //   location: position,
+    //   userId: GlobalState.getInstance().getUser().id,
+    // })
+
+    // setIsLoading(false)
+    // if (response.isSuccessful()) {
+    //   setIsVisible(true)
+    //   setTimeout(() => {
+    //     setIsVisible(false)
+    //     navigate('/sales', { replace: true })
+    //   }, 1000)
+    // } else {
+    //   setRequestErrorMessage(response.getData())
+    // }
   }
 
   const validateInputData = (): boolean => {
@@ -126,6 +137,7 @@ const AddSaleScene: React.FC = () => {
   return (
     <div className={styles['container']}>
       {isLoading && <Loading />}
+      {isVisible && <div style={addSaleSceneStyles.addSaleNotification}>Sale created successfully!</div>}
       <BaseText
         style={addSaleSceneStyles.pageTitle}
         text={Localization.translate('AddSaleScenePageTitle')}
@@ -298,7 +310,7 @@ const AddSaleScene: React.FC = () => {
   )
 }
 
-const addSaleSceneStyles = {
+const addSaleSceneStyles: StylesType = {
   pageTitle: {
     fontSize: FontSizes.h1,
     fontWeight: 'bold',
@@ -327,6 +339,17 @@ const addSaleSceneStyles = {
   autoLocation: {
     fontSize: FontSizes.extraSmall,
     textDecoration: 'underline',
+  },
+  addSaleNotification: {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    zIndex: 100,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    color: 'white',
+    padding: '1rem',
+    borderRadius: '0.5rem',
   },
 }
 

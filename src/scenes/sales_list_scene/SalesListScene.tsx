@@ -11,6 +11,7 @@ import { FontSizes, GlobalStyles } from '../../GlobalStyles'
 import { TextStandardization } from '../../text_process/TextStandardization'
 import { NormalButton } from '../../components/normal_button/NormalButton'
 import { useNavigate } from 'react-router-dom'
+import { StylesType } from '../../Types'
 
 const SalesListScene: React.FC = () => {
   const uiStore = useContext(Stores).getUIStore()
@@ -96,7 +97,7 @@ const SalesListScene: React.FC = () => {
   )
 }
 
-const salesListSceneStyles = {
+const salesListSceneStyles: StylesType = {
   title: {
     fontWeight: 'bold',
     fontSize: FontSizes.h1,

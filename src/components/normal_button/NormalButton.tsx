@@ -3,6 +3,7 @@ import { BaseText } from '../base_text/BaseText'
 import { RTLAwareView } from '../rtl_aware/RTLAwareView'
 import { FontSizes } from '../../GlobalStyles'
 import { Colors } from '../../utils/Constants'
+import { StylesType } from '../../Types'
 
 interface INormalButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   onClick: any
@@ -34,14 +35,14 @@ export const NormalButton: React.FC<INormalButtonProps> = ({
   }
   return (
     <button
-      style={Object.assign({}, Styles.container, containerStyle, extraStyle)}
+      style={Object.assign({}, normalButtonStyles.container, containerStyle, extraStyle)}
       onClick={onClick}
       disabled={disabled}
     >
-      <RTLAwareView style={Styles.rtlAwareview}>
+      <RTLAwareView style={normalButtonStyles.rtlAwareview}>
         <BaseText
           text={text}
-          style={Object.assign({}, Styles.textStyle, textStyle)}
+          style={Object.assign({}, normalButtonStyles.textStyle, textStyle)}
         />
       </RTLAwareView>
     </button>
@@ -59,7 +60,7 @@ NormalButton.defaultProps = {
   textStyle: null,
 }
 
-export const Styles = {
+export const normalButtonStyles: StylesType = {
   container: {
     border: 'none',
     outline: 'none',

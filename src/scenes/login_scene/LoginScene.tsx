@@ -13,6 +13,7 @@ import { NormalButton } from '../../components/normal_button/NormalButton'
 import { HttpManager } from '../../network/HttpManager'
 import { GlobalState } from '../../utils/GlobalState'
 import { Loading } from '../../components/loading/Loading'
+import { StylesType } from '../../Types'
 
 function LoginScene() {
   const [isLoading, setIsLoading] = useState(false)
@@ -154,7 +155,7 @@ function LoginScene() {
   )
 }
 
-const loginSceneStyles = {
+const loginSceneStyles: StylesType = {
   pageTitle: {
     fontSize: FontSizes.h1,
     fontWeight: 'bold',
