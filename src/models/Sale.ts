@@ -11,10 +11,10 @@ export interface IRawSale {
   id: number
   title: string
   address: string
-  phone_number: string
+  phoneNumber: string
   description: string
   location: any
-  user_id: number
+  userId: number
 }
 
 export class SaleFactory {
@@ -23,10 +23,10 @@ export class SaleFactory {
       id: sale.id,
       title: sale.title,
       address: sale.address,
-      phoneNumber: sale.phone_number,
+      phoneNumber: sale.phoneNumber,
       description: sale.description,
       location: sale.location,
-      userId: sale.user_id,
+      userId: sale.userId,
     }
   }
 }
