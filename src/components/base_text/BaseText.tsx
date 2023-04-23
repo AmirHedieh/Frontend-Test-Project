@@ -14,7 +14,8 @@ export const BaseText: React.FC<IBaseTextProps> = ({ text = '', style = {}, clas
   const fontFamily = CommonValidator.isPersian(firstChar) ? Fonts.persian.vazir : Fonts.english.openSansRegular
   const fontSize = FontSizes.h3
   const color = Colors.primaryMedium
-  const mergedStyles = { fontFamily, fontSize, color, ...style }
+  const baseStyle = { 'white-space': 'pre-line', 'text-align': 'center' }
+  const mergedStyles = { fontFamily, fontSize, color, ...baseStyle, ...style }
   const mergedClassNames = `BaseText ${className}`
   return (
     <span
