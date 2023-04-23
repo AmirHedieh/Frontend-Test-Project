@@ -1,3 +1,5 @@
+import { User } from '../Types'
+
 interface IGlobalState {
   token: string
   user: User
@@ -35,10 +37,4 @@ export class GlobalState {
       user: null,
     }
   }
-}
-
-type User = {
-  id: number
-  name: string
-  email: string
 }
