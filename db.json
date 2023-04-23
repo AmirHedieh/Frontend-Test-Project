@@ -1,16 +1,60 @@
 {
   "users": [
     {
-      "id": 1,
-      "email": "user1@example.com",
-      "password": "password1"
+      "email": "amirhedieh@gmail.com",
+      "password": "$2a$10$xFt0y9QFBrAsJJM4TZTq2uPEtwb7oQT9plGm0aXb5/h49kubRpnYm",
+      "name": "Amir Hedieh",
+      "id": 1
+    }
+  ],
+  "sales": [
+    {
+      "title": "زعفران اعلا",
+      "phoneNumber": "09905226632",
+      "address": "جنت آباد شمالی - خیابان ایرانشهر - پلاک 18",
+      "description": "زعفران ارگانیک با رعایت کامل موارد بهداشتی",
+      "location": {
+        "lat": 35.77063086443872,
+        "lng": 51.30799756703246
+      },
+      "userId": 1,
+      "id": 1
     },
     {
-      "sds": 2,
-      "sd": 3,
-      "id": 2,
-      "email": "user2@example.com",
-      "password": "password2"
+      "title": "لپتاپ دست دوم",
+      "phoneNumber": "09905005003",
+      "address": "یافت آباد - خیابان بابایی - پلاک 5",
+      "description": "لپتاپ کم کارکرد با کارت گرافیک بالارده جهت مصارف رندرینگ و گیمینگ",
+      "location": {
+        "lat": 33.77063086443872,
+        "lng": 50.30799756703246
+      },
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "title": "ماشین رانا",
+      "phoneNumber": "09905226620",
+      "address": "حصارک - خیابان مولایی - پلاک 12",
+      "description": "ماشین رانا با 2000 کیلومتر کارکرد جهت فروش",
+      "location": {
+        "lat": 35.12063086443872,
+        "lng": 51.60799756703246
+      },
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "title": "پرینتر سه بعدی",
+      "phoneNumber": "09905226682",
+      "address": "خانی آباد نو - کوچه نعمتی - پلاک 83",
+      "description": "پرینتر سه بعدی با متریال های مورد نیاز چاپ",
+      "location": {
+        "lat": 35.17063086443872,
+        "lng": 51.40799756703246
+      },
+      "userId": 1,
+      "id": 4
     }
   ]
 }
