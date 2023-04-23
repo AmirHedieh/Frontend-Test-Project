@@ -49,30 +49,25 @@ const AddSaleScene: React.FC = () => {
   }
 
   const addSale = async (): Promise<void> => {
-    setIsVisible(true)
-    setTimeout(() => {
-      setIsVisible(false)
-      // navigate('/sales', { replace: true })
-    }, 1000)
-    // const response = await HttpManager.getInstance().addSale({
-    //   title: titleEditTextRef.getStandardText(),
-    //   phoneNumber: phoneNumberEditTextRef.getStandardText(),
-    //   address: addressEditTextRef.getStandardText(),
-    //   description: descriptionEditTextRef.getStandardText(),
-    //   location: position,
-    //   userId: GlobalState.getInstance().getUser().id,
-    // })
+    const response = await HttpManager.getInstance().addSale({
+      title: titleEditTextRef.getStandardText(),
+      phoneNumber: phoneNumberEditTextRef.getStandardText(),
+      address: addressEditTextRef.getStandardText(),
+      description: descriptionEditTextRef.getStandardText(),
+      location: position,
+      userId: GlobalState.getInstance().getUser().id,
+    })
 
-    // setIsLoading(false)
-    // if (response.isSuccessful()) {
-    //   setIsVisible(true)
-    //   setTimeout(() => {
-    //     setIsVisible(false)
-    //     navigate('/sales', { replace: true })
-    //   }, 1000)
-    // } else {
-    //   setRequestErrorMessage(response.getData())
-    // }
+    setIsLoading(false)
+    if (response.isSuccessful()) {
+      setIsVisible(true)
+      setTimeout(() => {
+        setIsVisible(false)
+        navigate('/sales', { replace: true })
+      }, 1000)
+    } else {
+      setRequestErrorMessage(response.getData())
+    }
   }
 
   const validateInputData = (): boolean => {
@@ -342,13 +337,13 @@ const addSaleSceneStyles: StylesType = {
   },
   addSaleNotification: {
     position: 'fixed',
-    top: '50%',
+    top: '30%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     zIndex: 100,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
     color: 'white',
-    padding: '1rem',
+    padding: '1.5rem',
     borderRadius: '0.5rem',
   },
 }
