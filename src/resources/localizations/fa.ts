@@ -28,6 +28,7 @@ export const Fa = {
   /** SalesListScene */
   SalesListSceneTitle: 'لیست آگهی ها',
   SalesListSceneAddSale: 'افزودن آگهی',
+  SalesListSceneNoSaleFound: 'در حال حاضر آگهی ای یافت نشد',
   /** AddSaleScene */
   AddSaleSceneTitlePlaceholder: 'عنوان آگهی',
   AddSaleSceneAddressPlaceholder: 'جنت آباد شمالی',

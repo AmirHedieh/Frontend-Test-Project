@@ -1,6 +1,6 @@
 import styles from './LoginScene.module.css'
 import { observer } from 'mobx-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Localization } from '../../text_process/Localization'
 import { BaseText } from '../../components/base_text/BaseText'
 import { EditText } from '../../components/edit_text/EditText'
@@ -23,6 +23,10 @@ function LoginScene() {
 
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
+
+  useEffect(() => {
+    document.title = 'Login'
+  }, [])
 
   const onLoginButtonClick = async (event): Promise<void> => {
     if (validateInputData(event)) {

@@ -1,6 +1,6 @@
 import styles from './RegisterScene.module.css'
 import { observer } from 'mobx-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Localization } from '../../text_process/Localization'
 import { BaseText } from '../../components/base_text/BaseText'
 import { EditText } from '../../components/edit_text/EditText'
@@ -23,6 +23,10 @@ function RegisterScene() {
   let nameEditTextRef: EditText = null
   let emailEditTextRef: EditText = null
   let passwordEditTextRef: EditText = null
+
+  useEffect(() => {
+    document.title = 'Register'
+  }, [])
 
   const onRegisterButtonClick = async (event): Promise<void> => {
     if (validateInputData(event)) {

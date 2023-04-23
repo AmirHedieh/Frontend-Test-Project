@@ -14,9 +14,10 @@ import { useNavigate } from 'react-router-dom'
 import { StylesType } from '../../Types'
 import UserController from '../../components/user_controller/UserController'
 import { GlobalState } from '../../utils/GlobalState'
+import { SafeTouch } from '../../components/safe_touch/SafeTouch'
+import { CommonValidator } from '../../utils/Validator'
 
 const SalesListScene: React.FC = () => {
-  console.log(GlobalState.getInstance().getUser())
   const uiStore = useContext(Stores).getUIStore()
   const navigate = useNavigate()
 
@@ -47,12 +48,20 @@ const SalesListScene: React.FC = () => {
     fetchSales()
   }, [page])
 
+  useEffect(() => {
+    document.title = 'Sales List'
+  }, [])
+
   const handlePageChange = (newPage: number) => {
     setPage(newPage)
   }
 
   const onAddSaleClick = () => {
     navigate('/add-sale')
+  }
+
+  const onSaleCardClick = (sale: ISale) => {
+    navigate(`${sale.id}`)
   }
 
   let pagiantionArr = Array.from(
@@ -73,15 +82,22 @@ const SalesListScene: React.FC = () => {
         <BaseText text={Localization.translate('loading')} />
       ) : (
         <div className={styles['center-container']}>
-          <div className={styles['sales-list']}>
-            {sales.map((sale) => (
-              <SaleCard
-                key={sale.id}
-                title={sale.title}
-                address={TextStandardization.truncateText(sale.address, 60)}
-              />
-            ))}
-          </div>
+          {!CommonValidator.isEmptyArray(sales) ? (
+            <div className={styles['sales-list']}>
+              {sales.map((sale) => (
+                <SafeTouch onClick={() => onSaleCardClick(sale)}>
+                  <SaleCard
+                    key={sale.id}
+                    title={sale.title}
+                    address={TextStandardization.truncateText(sale.address, 60)}
+                  />
+                </SafeTouch>
+              ))}
+            </div>
+          ) : (
+            <BaseText text={Localization.translate('SalesListSceneNoSaleFound')} />
+          )}
+
           <div style={GlobalStyles.verticalSpacerSmall} />
           <div className={styles['sales-pagination']}>
             {pagiantionArr.map((pageNumber) => (

@@ -47,6 +47,10 @@ const AddSaleScene: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    document.title = 'Add Sale'
+  }, [])
+
   const addSale = async (): Promise<void> => {
     const response = await HttpManager.getInstance().addSale({
       title: titleEditTextRef.getStandardText(),

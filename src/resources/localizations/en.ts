@@ -28,6 +28,7 @@ export const En = {
   /** SalesListScene */
   SalesListSceneTitle: 'Sales List',
   SalesListSceneAddSale: 'Add Sale',
+  SalesListSceneNoSaleFound: 'There is no sale for now',
   /** AddSaleScene */
   AddSaleSceneTitlePlaceholder: 'Sale Title',
   AddSaleScenePhoneNumberPlaceholder: '09905226632',
