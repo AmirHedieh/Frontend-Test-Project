@@ -19,7 +19,7 @@ const UIController: React.FC = () => {
 
   return (
     <div>
-      <ToggleSwitch
+      {/* <ToggleSwitch
         className={styles['theme-switch']}
         isOn={uiStore.getTheme() === 'light' ? true : false}
         handleToggle={handleThemeChange}
@@ -27,7 +27,7 @@ const UIController: React.FC = () => {
         offColor="#333333"
         onText={Localization.translate('light')}
         offText={Localization.translate('dark')}
-      />
+      /> */}
 
       <div className={styles['language-dropdown']}>
         <label htmlFor="language-select">
