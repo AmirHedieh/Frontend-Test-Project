@@ -1,9 +1,10 @@
-import { makeAutoObservable, observable, computed } from 'mobx'
+import { makeAutoObservable } from 'mobx'
+import { LocalizationLanguages } from '../Types'
 
 export class UIStore {
   private rootStore = null
 
-  private language: language
+  private language: LocalizationLanguages
   private theme: theme
 
   constructor(rootStore) {
@@ -13,11 +14,11 @@ export class UIStore {
     this.theme = 'light'
   }
 
-  public getLanguage(): language {
+  public getLanguage(): LocalizationLanguages {
     return this.language
   }
 
-  public setLanguage(lang: 'fa' | 'en'): void {
+  public setLanguage(lang: LocalizationLanguages): void {
     this.language = lang
   }
 
@@ -31,4 +32,3 @@ export class UIStore {
 }
 
 type theme = 'light' | 'dark'
-type language = 'en' | 'fa'
