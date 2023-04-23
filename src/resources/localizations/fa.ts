@@ -5,6 +5,7 @@ export const Fa = {
   en: 'انگلیسی',
   fa: 'فارسی',
   loading: 'در حال بارگذاری...',
+  invalid: 'نامعتبر',
   /** Login Scene */
   LoginSceneLogin: 'ورود',
   LoginSceneEmail: 'ایمیل',
@@ -32,12 +33,13 @@ export const Fa = {
   AddSaleScenePhoneNumberPlaceholder: '09905226632',
   AddSaleSceneDescriptionPlaceholder: 'توضیحات محصول',
   AddSaleSceneTitle: 'عنوان',
-  AddSaleScenePhoneNumber: 'شماره تماس',
+  AddSaleScenePhoneNumber: 'شماره تماس(موبایل)',
   AddSaleSceneAddress: 'آدرس',
   AddSaleSceneDescription: 'توضیحات',
   AddSaleSceneAddSaleConfirm: 'تایید',
   AddSaleScenePageTitle: 'افزودن آگهی',
   AddSaleSceneAutoLocation: 'موقعیت یابی خودکار',
   AddSaleSceneYouAreHere: 'شما اینجا هستید',
-  AddSaleScenePickLocationGuide: 'لطفا موقعیت خود را مشخص کنید\n(در صورت داشتن VPN آن را خاموش کنید)',
+  AddSaleScenePickLocationGuide:
+    'لطفا موقعیت خود را مشخص کنید\n(در صورت استفاده از موقعیت یاب خودکار از خاموش بودن فیلترشکن خود اطمینان حاصل کنید)',
 }

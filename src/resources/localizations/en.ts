@@ -5,6 +5,7 @@ export const En = {
   en: 'EN',
   fa: 'FA',
   loading: 'Loading...',
+  invalid: 'Invalid',
   /** Login Scene */
   LoginSceneLogin: 'Login',
   LoginSceneEmail: 'Email',
@@ -39,5 +40,5 @@ export const En = {
   AddSaleScenePageTitle: 'Add Sale',
   AddSaleSceneAutoLocation: 'Auto Location Pick',
   AddSaleSceneYouAreHere: 'You Are Here',
-  AddSaleScenePickLocationGuide: `Please Select Your Location\n(Make sure not to have VPN on)`,
+  AddSaleScenePickLocationGuide: `Please Select Your Location\n(If Using Auto-Location Make sure not to have VPN on)`,
 }

@@ -26,7 +26,12 @@ const SalesListScene: React.FC = () => {
   useEffect(() => {
     const fetchSales = async () => {
       setIsLoading(true)
-      const response = await HttpManager.getInstance().getSales({ _page: page, _limit: PAGE_LIMIT })
+      const response = await HttpManager.getInstance().getSales({
+        _page: page,
+        _limit: PAGE_LIMIT,
+        _sort: 'id',
+        _order: 'desc',
+      })
       setIsLoading(false)
       if (response.isSuccessful()) {
         setSales(response.getData())

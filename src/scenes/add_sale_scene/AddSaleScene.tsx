@@ -11,19 +11,93 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import './Leaflet.css'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { Map } from 'leaflet'
+import { CommonValidator } from '../../utils/Validator'
+import { HttpManager } from '../../network/HttpManager'
+import { ILocation } from '../../Types'
+import { title } from 'process'
+import { useNavigate } from 'react-router-dom'
+import { Loading } from '../../components/loading/Loading'
+import { GlobalState } from '../../utils/GlobalState'
 
 const AddSaleScene: React.FC = () => {
+  console.log(GlobalState.getInstance().getUser())
+
   const [map, setMap] = useState<Map>(null)
-  const [position, setPosition] = useState({ lat: 35.7, lng: 51.3 })
+  const [position, setPosition] = useState<ILocation>({ lat: 35.7, lng: 51.3 })
+
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const [requestErrorMessage, setRequestErrorMessage] = useState('')
+  const [titleErrorMessage, setTitleErrorMessage] = useState('')
+  const [phoneNumberErrorMessage, setPhoneNumberErrorMessage] = useState('')
+  const [addressErrorMessage, setAddressErrorMessage] = useState('')
+  const [descriptionErrorMessage, setDescriptionErrorMessage] = useState('')
 
   let markerRef = useRef(null)
+  let navigate = useNavigate()
 
   let titleEditTextRef: EditText = null
   let phoneNumberEditTextRef: EditText = null
   let addressEditTextRef: EditText = null
   let descriptionEditTextRef: EditText = null
 
-  const onAddSaleClick = () => {}
+  const onConfirmClick = (): void => {
+    if (validateInputData()) {
+      addSale()
+    }
+  }
+
+  const addSale = async (): Promise<void> => {
+    const response = await HttpManager.getInstance().addSale({
+      title: titleEditTextRef.getStandardText(),
+      phoneNumber: phoneNumberEditTextRef.getStandardText(),
+      address: addressEditTextRef.getStandardText(),
+      description: descriptionEditTextRef.getStandardText(),
+      location: position,
+      userId: GlobalState.getInstance().getUser().id,
+    })
+    setIsLoading(false)
+    if (response.isSuccessful()) {
+      navigate('/sales', { replace: true })
+    } else {
+      setRequestErrorMessage(response.getData())
+    }
+  }
+
+  const validateInputData = (): boolean => {
+    let isValid: boolean = true
+    if (CommonValidator.isNullOrEmpty(titleEditTextRef.getStandardText())) {
+      setTitleErrorMessage(Localization.translate('invalid'))
+      isValid = false
+    } else {
+      setTitleErrorMessage('')
+    }
+
+    if (
+      CommonValidator.isNullOrEmpty(phoneNumberEditTextRef.getStandardText()) ||
+      !CommonValidator.isPhoneNumber(phoneNumberEditTextRef.getStandardText())
+    ) {
+      setPhoneNumberErrorMessage(Localization.translate('invalid'))
+      isValid = false
+    } else {
+      setPhoneNumberErrorMessage('')
+    }
+
+    if (CommonValidator.isNullOrEmpty(addressEditTextRef.getStandardText())) {
+      setAddressErrorMessage(Localization.translate('invalid'))
+      isValid = false
+    } else {
+      setAddressErrorMessage('')
+    }
+
+    if (CommonValidator.isNullOrEmpty(descriptionEditTextRef.getStandardText())) {
+      setDescriptionErrorMessage(Localization.translate('invalid'))
+      isValid = false
+    } else {
+      setDescriptionErrorMessage('')
+    }
+    return isValid
+  }
 
   useEffect(() => {
     if (map && markerRef.current) {
@@ -38,10 +112,6 @@ const AddSaleScene: React.FC = () => {
     }
   }, [map])
 
-  useEffect(() => {
-    console.log(position)
-  }, [position])
-
   const onAutoLocationClick = () => {
     if (navigator.geolocation) {
       map.locate().on('locationfound', function (e) {
@@ -55,6 +125,7 @@ const AddSaleScene: React.FC = () => {
 
   return (
     <div className={styles['container']}>
+      {isLoading && <Loading />}
       <BaseText
         style={addSaleSceneStyles.pageTitle}
         text={Localization.translate('AddSaleScenePageTitle')}
@@ -79,6 +150,15 @@ const AddSaleScene: React.FC = () => {
             placeholder={Localization.translate('AddSaleSceneTitlePlaceholder')}
           />
         </div>
+        {titleErrorMessage && (
+          <RTLAwareView style={addSaleSceneStyles.errorBox}>
+            <div style={GlobalStyles.spacer} />
+            <BaseText
+              style={addSaleSceneStyles.inputError}
+              text={titleErrorMessage}
+            />
+          </RTLAwareView>
+        )}
       </div>
       <div style={GlobalStyles.verticalSpacerLarge} />
       <div>
@@ -100,6 +180,15 @@ const AddSaleScene: React.FC = () => {
             placeholder={Localization.translate('AddSaleScenePhoneNumberPlaceholder')}
           />
         </div>
+        {phoneNumberErrorMessage && (
+          <RTLAwareView style={addSaleSceneStyles.errorBox}>
+            <div style={GlobalStyles.spacer} />
+            <BaseText
+              style={addSaleSceneStyles.inputError}
+              text={phoneNumberErrorMessage}
+            />
+          </RTLAwareView>
+        )}
       </div>
       <div style={GlobalStyles.verticalSpacerLarge} />
       <div>
@@ -121,6 +210,15 @@ const AddSaleScene: React.FC = () => {
             placeholder={Localization.translate('AddSaleSceneAddressPlaceholder')}
           />
         </div>
+        {addressErrorMessage && (
+          <RTLAwareView style={addSaleSceneStyles.errorBox}>
+            <div style={GlobalStyles.spacer} />
+            <BaseText
+              style={addSaleSceneStyles.inputError}
+              text={addressErrorMessage}
+            />
+          </RTLAwareView>
+        )}
       </div>
       <div style={GlobalStyles.verticalSpacerLarge} />
       <div>
@@ -142,6 +240,15 @@ const AddSaleScene: React.FC = () => {
             placeholder={Localization.translate('AddSaleSceneDescriptionPlaceholder')}
           />
         </div>
+        {descriptionErrorMessage && (
+          <RTLAwareView style={addSaleSceneStyles.errorBox}>
+            <div style={GlobalStyles.spacer} />
+            <BaseText
+              style={addSaleSceneStyles.inputError}
+              text={descriptionErrorMessage}
+            />
+          </RTLAwareView>
+        )}
       </div>
       <div style={GlobalStyles.verticalSpacerLarge} />
       <div style={GlobalStyles.verticalSpacerLarge} />
@@ -162,14 +269,12 @@ const AddSaleScene: React.FC = () => {
         />
         {position && (
           <Marker
-            // draggable={true}
             position={position}
             ref={markerRef}
           >
             <Popup>{Localization.translate('AddSaleSceneYouAreHere')}</Popup>
           </Marker>
         )}
-        {/* <CenterMarker /> */}
       </MapContainer>
       <SafeTouch onClick={onAutoLocationClick}>
         <BaseText
@@ -178,9 +283,15 @@ const AddSaleScene: React.FC = () => {
         />
       </SafeTouch>
       <div style={GlobalStyles.verticalSpacerLarge} />
+      {requestErrorMessage && (
+        <BaseText
+          style={addSaleSceneStyles.inputError}
+          text={requestErrorMessage}
+        />
+      )}
       <NormalButton
         text={Localization.translate('AddSaleSceneAddSaleConfirm')}
-        onClick={onAddSaleClick}
+        onClick={onConfirmClick}
       />
       <div style={GlobalStyles.verticalSpacerLarge} />
     </div>
@@ -200,9 +311,15 @@ const addSaleSceneStyles = {
     paddingLeft: '12px',
     paddingRight: '12px',
   },
+  errorBox: {
+    paddingTop: '8px',
+    paddingLeft: '12px',
+    paddingRight: '12px',
+  },
   inputError: {
     color: 'red',
     fontSize: FontSizes.p,
+    fontWeight: 'bold',
   },
   locationGuide: {
     fontSize: FontSizes.p,
