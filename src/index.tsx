@@ -10,6 +10,7 @@ import SalesListScene from './scenes/sales_list_scene/SalesListScene'
 import UIController from './components/ui_controller/UIController'
 import AddSaleScene from './scenes/add_sale_scene/AddSaleScene'
 import { GlobalState } from './utils/GlobalState'
+import SaleDataScene from './scenes/sale_data_scene/SaleDataScene'
 
 if (
   !new (class {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: '/add-sale',
     element: <AddSaleScene />,
+  },
+  {
+    path: '/sales/:id',
+    element: <SaleDataScene />,
   },
 ])
 

@@ -105,4 +105,18 @@ export class HttpManager {
       }
     }
   }
+
+  public getSale = async (params: { id: number }): Promise<CustomResponse> => {
+    try {
+      return new CustomResponse(await this.axiosWithToken.get(`sales/${params.id}`))
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response)
+        return new CustomResponse(error.response)
+      } else {
+        // handle other errors here
+        throw error
+      }
+    }
+  }
 }
